@@ -7,12 +7,13 @@ const ErrorPage = () => {
   return (
     <div
       id="error-page"
-      className="flex flex-col text-zinc-100 items-center justify-center h-screen"
+      className="flex h-screen flex-col items-center justify-center text-zinc-100"
     >
       <h1 className="text-64 font-bold">Oops!</h1>
-      <p className="text-20 mb-12">Sorry, an unexpected error has occurred.</p>
+      <p className="mb-12 text-20">Sorry, an unexpected error has occurred.</p>
 
-      <p className="text-red-500 text-18">
+      <p className="text-18 text-red-500">
+        {/* @ts-expect-error unkown */}
         <i>{error.statusText || error.message}</i>
       </p>
     </div>
