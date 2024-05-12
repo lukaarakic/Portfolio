@@ -1,0 +1,100 @@
+/* @font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Variable.woff2') format('woff2'),
+    url('/fonts/Satoshi-Variable.woff') format('woff');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: normal;
+} */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Satoshi', sans-serif;
+    font-size: calc(100vw / 3440 * 10);
+    box-sizing: border-box;
+    line-height: 1.2;
+    letter-spacing: -4%;
+
+    cursor: none;
+  }
+
+  ::selection {
+    @apply bg-zinc-400;
+  }
+
+  body {
+    @apply mx-auto bg-zinc-950 px-20 pb-20 text-zinc-500;
+    max-width: 2600px;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media only screen and (max-width: 160em) {
+    html {
+      font-size: calc(100vw / 2560 * 12);
+    }
+  }
+  @media only screen and (max-width: 120em) {
+    html {
+      font-size: calc(100vw / 1920 * 10);
+    }
+  }
+  @media only screen and (max-width: 63.8em) {
+    html {
+      font-size: calc(100vw / 1024 * 10);
+    }
+  }
+  @media only screen and (max-width: 36.25em) {
+    html {
+      font-size: calc(100vw / 580 * 10);
+    }
+  }
+
+  /* Lenis */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+  /*  */
+}
+
+@layer components {
+  .rounded-background {
+    @apply rounded-40 bg-zinc-800;
+  }
+
+  .fake-button {
+    @apply flex items-center gap-2 rounded-full bg-zinc-800 px-12 py-5;
+  }
+
+  #trailer {
+    @apply pointer-events-none fixed left-0 top-0 h-16 w-16 rounded-full bg-zinc-100 p-3 opacity-0 transition-all;
+    z-index: 999;
+  }
+
+  body:hover #trailer {
+    opacity: 1;
+  }
+}
