@@ -97,4 +97,24 @@
   body:hover #trailer {
     opacity: 1;
   }
+
+  .interactive-anim {
+  }
+
+  .card:hover .interactive-anim {
+    animation-name: interactive-anim;
+    animation-duration: 1s;
+  }
+
+  @keyframes interactive-anim {
+    0% {
+      transform: scale(1) rotate(0);
+    }
+    50% {
+      transform: scale(0.8) rotate(0deg);
+    }
+    100% {
+      transform: scale(1) rotate(360deg);
+    }
+  }
 }
