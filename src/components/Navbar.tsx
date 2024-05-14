@@ -13,8 +13,8 @@ const Navbar = () => {
       <Link to={'/'}>{isHomepage ? <HomepageLogo /> : <Logo />}</Link>
 
       <div className="flex items-center gap-14 text-18">
-        <Link to={'/'}>About me</Link>
-        <Link to={'/'}>Work</Link>
+        <Link to={'/about-me'}>About me</Link>
+        <Link to={'/projects'}>Work</Link>
         <CopyButton copyValue="hello@lukarakic.me">
           <Copy className="w-8" />
           hello@lukarakic.me

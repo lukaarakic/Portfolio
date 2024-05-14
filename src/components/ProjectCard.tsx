@@ -28,7 +28,7 @@ const ProjectCard = ({ className, imageUrl, alt, to }: ProjectCardProps) => {
 
   return (
     <article
-      className={`${className} relative flex`}
+      className={`${className} relative flex cursor-pointer`}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onClick={onClick}

@@ -2,7 +2,12 @@ import Sportlink from '../assets/Mockups/Sportlink.png'
 import Yoga from '../assets/Mockups/Yoga.png'
 import Drawgether from '../assets/Mockups/drawgether.png'
 import ProjectCard from '../components/ProjectCard'
+import Card from '../components/card-module/Card'
 import CardList from '../components/card-module/CardList'
+
+import Shape from '../assets/shape.svg?react'
+import Layout from '../assets/layout-2.svg?react'
+import Code from '../assets/code.svg?react'
 
 export default function Index() {
   return (
@@ -53,13 +58,36 @@ export default function Index() {
       </section>
 
       <section className="my-40 flex">
-        <h3 className="mr-auto w-[44rem] text-40 font-medium">
+        <h3 className="mr-52 w-[44rem] text-40 font-medium">
           What can I do to{' '}
           <span className="text-zinc-100">efficiently support</span> you and
           your business?
         </h3>
 
-        <CardList />
+        <CardList className="gap-14">
+          <Card
+            title="UI Desgin"
+            icon={<Layout />}
+            description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+          tempor tortor lorem, et vulputate orci lacinia sit amet. Donec at
+          euismod erat.`}
+          />
+
+          <Card
+            title="Interactive Animation"
+            icon={<Shape className="interactive-anim" />}
+            description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+            tempor tortor lorem, et vulputate orci lacinia sit amet. Donec at
+            euismod erat.`}
+          />
+          <Card
+            title="Development"
+            icon={<Code />}
+            description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+          tempor tortor lorem, et vulputate orci lacinia sit amet. Donec at
+          euismod erat.`}
+          />
+        </CardList>
       </section>
     </>
   )

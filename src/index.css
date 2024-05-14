@@ -19,7 +19,7 @@
     line-height: 1.2;
     letter-spacing: -4%;
 
-    cursor: none;
+    /* cursor: none; */
   }
 
   ::selection {
@@ -96,9 +96,6 @@
 
   body:hover #trailer {
     opacity: 1;
-  }
-
-  .interactive-anim {
   }
 
   .card:hover .interactive-anim {

@@ -1,7 +1,7 @@
 /// <reference types="vite-plugin-svgr/client" />
 
 import Copy from '../assets/file-copy.svg?react'
-import Send from '../assets/mail-send.svg?react'
+import ContactButton from './ContactButton'
 import CopyButton from './CopyButton'
 
 const Footer = () => {
@@ -19,13 +19,7 @@ const Footer = () => {
         </h2>
 
         <div className="flex items-center gap-6 text-18 font-medium text-zinc-100">
-          <a
-            href="mailto:hello@lukarakic.me"
-            className="fake-button w-fit gap-2 bg-slate-300 text-18 font-medium text-zinc-800"
-          >
-            Contact me
-            <Send className="w-10 text-zinc-800" />
-          </a>
+          <ContactButton />
           <div className="flex items-center gap-4">
             <span>or copy an email: </span>
 

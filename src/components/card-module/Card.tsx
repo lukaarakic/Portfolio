@@ -3,12 +3,15 @@ import { ReactNode } from 'react'
 interface CardProps {
   title: string
   description: string
-  icon?: ReactNode
+  icon: ReactNode
+  className?: string
 }
 
-const Card = ({ title, description, icon }: CardProps) => {
+const Card = ({ title, description, icon, className }: CardProps) => {
   return (
-    <div className="card rounded-background rounded-[2.3rem] p-10">
+    <div
+      className={`card rounded-background rounded-[2.3rem] p-10 ${className}`}
+    >
       <div className="mb-6 h-20 w-20 rounded-xl bg-zinc-300 p-3 text-zinc-800">
         {icon}
       </div>

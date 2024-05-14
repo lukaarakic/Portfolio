@@ -7,6 +7,8 @@ import Root from './routes/root'
 import ErrorPage from './routes/errror-page'
 import Index from './routes/index'
 import ProjectPage from './routes/project-page'
+import WorkPage from './routes/work-page'
+import AboutMe from './routes/about-me'
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
       {
         path: 'project/:projectName',
         element: <ProjectPage />,
+      },
+      {
+        path: 'projects',
+        element: <WorkPage />,
+      },
+      {
+        path: 'about-me',
+        element: <AboutMe />,
       },
     ],
   },
