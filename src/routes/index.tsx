@@ -1,6 +1,3 @@
-import Sportlink from '../assets/Mockups/Sportlink.png'
-import Yoga from '../assets/Mockups/Yoga.png'
-import Drawgether from '../assets/Mockups/drawgether.png'
 import ProjectCard from '../components/ProjectCard'
 import Card from '../components/card-module/Card'
 import CardList from '../components/card-module/CardList'
@@ -8,8 +5,13 @@ import CardList from '../components/card-module/CardList'
 import Shape from '../assets/shape.svg?react'
 import Layout from '../assets/layout-2.svg?react'
 import Code from '../assets/code.svg?react'
+import { useAllPrismicDocumentsByType } from '@prismicio/react'
 
 export default function Index() {
+  const [document] = useAllPrismicDocumentsByType('project', {
+    limit: 3,
+  })
+
   return (
     <>
       <section className="flex h-screen flex-col items-start justify-end gap-5 pb-20">
@@ -30,30 +32,15 @@ export default function Index() {
           Latest <span className="text-zinc-100">Projects</span>
         </h3>
 
-        <div className="mt-20">
-          <div className="flex h-[76rem] gap-12">
+        <div className="grid-cols-home-grid mt-20 grid gap-12">
+          {document?.map((project, i) => (
             <ProjectCard
-              imageUrl={Sportlink}
-              alt="Sportlink"
-              className="interactable w-[40%]"
-              to="sportlink"
+              imageUrl={project.data.mockup.url}
+              to={project.slugs[0]}
+              className={`interactable ${i == 2 ? 'col-span-full h-[84rem]' : ''}`}
+              alt={project.data.mockup.alt}
             />
-            <ProjectCard
-              imageUrl={Yoga}
-              alt="Yoga"
-              className="interactable w-[60%] "
-              to="yoga"
-            />
-          </div>
-
-          <div className="mt-12">
-            <ProjectCard
-              imageUrl={Drawgether}
-              alt="Drawgether"
-              className="interactable h-[84rem] w-full"
-              to="drawgether"
-            />
-          </div>
+          ))}
         </div>
       </section>
 
@@ -68,17 +55,13 @@ export default function Index() {
           <Card
             title="UI Desgin"
             icon={<Layout />}
-            description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-          tempor tortor lorem, et vulputate orci lacinia sit amet. Donec at
-          euismod erat.`}
+            description={`To effectively support your business with UI design, I create user-centric, brand-consistent designs that increase engagement and provide a seamless, modern experience.`}
           />
 
           <Card
             title="Interactive Animation"
             icon={<Shape className="interactive-anim" />}
-            description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-            tempor tortor lorem, et vulputate orci lacinia sit amet. Donec at
-            euismod erat.`}
+            description={`I can make unique, interesting animations that fit nicely with your brand's aesthetic, increase engagement with your users, and help you reach your business objectives.`}
           />
           <Card
             title="Development"

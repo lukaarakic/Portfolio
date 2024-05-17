@@ -9,7 +9,7 @@ interface ProjectInfoProps {
 const StickySection = ({ title, content, className }: ProjectInfoProps) => {
   return (
     <section
-      className={`relative grid grid-cols-project-25/75 py-40 ${className}`}
+      className={`relative grid grid-cols-1 py-40 lg:grid-cols-project-25/75 ${className}`}
     >
       <div>{title}</div>
 

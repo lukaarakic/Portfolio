@@ -21,6 +21,10 @@ export default {
         'project-45/55': '45fr 55fr',
         'project-55/45': '55fr 45fr',
         'project-25/75': '25fr 75fr',
+        'home-grid': '40fr 60fr',
+      },
+      screens: {
+        xs: '580px',
       },
     },
   },

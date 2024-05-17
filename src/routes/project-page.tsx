@@ -1,62 +1,75 @@
-import StickySection from '../components/StickySection'
-
-import Start from '../assets/project-images/home.png'
-import HomePage from '../assets/project-images/crJdAgR.png'
-import SearchPage from '../assets/project-images/iXoYGyx.png'
-import ProfilePage from '../assets/project-images/oNTMkIc.png'
-import PlayPage from '../assets/project-images/WJhED1v.png'
-import GamePage from '../assets/project-images/UcSuR9f.png'
+import { useLocation } from 'react-router-dom'
+import { usePrismicDocumentByUID } from '@prismicio/react'
+import Arrow from '../assets/arrow-right-up.svg?react'
+import ProjectInfo from '../components/ProjectInfo'
 
 const ProjectPage = () => {
+  const location = useLocation()
+  const pathname = location.pathname.split('/')[2]
+
+  const [document] = usePrismicDocumentByUID('project', pathname)
+
+  if (!document) {
+    return <div className="h-screen w-full"></div>
+  }
+
   return (
     <>
       <section>
         <h1 className="mb-16 mt-80 text-64 font-bold text-zinc-100">
-          Drawgether
+          {document.data.name}
         </h1>
         <ul className="mb-24 flex items-start justify-between">
           <li>
-            <h3 className="text-24 font-bold text-zinc-100">Role</h3>
+            <h3 className="mb-1 text-24 font-bold text-zinc-100">Role</h3>
             <p className="max-w-[35rem] text-20 font-medium">
-              Front-end Developer
+              {document.data.role}
             </p>
           </li>
           <li>
-            <h3 className="text-24 font-bold text-zinc-100">Platforms</h3>
-            <p className="max-w-[35rem] text-20 font-medium">Web</p>
-          </li>
-          <li>
-            <h3 className="text-24 font-bold text-zinc-100">Assignment</h3>
+            <h3 className="mb-1 text-24 font-bold text-zinc-100">Platforms</h3>
             <p className="max-w-[35rem] text-20 font-medium">
-              Build an app that helps people express their creativity in the
-              digital world.
+              {document.data.platform}
             </p>
           </li>
           <li>
-            <h3 className="text-24 font-bold text-zinc-100">Objective</h3>
+            <h3 className="mb-1 text-24 font-bold text-zinc-100">Assignment</h3>
             <p className="max-w-[35rem] text-20 font-medium">
-              To create a fun and social environment where people can express
-              themselves creatively through drawing based on dynamic prompts
-              from ChatGPT.
+              {document.data.assignment}
             </p>
           </li>
           <li>
-            <h3 className="text-24 font-bold text-zinc-100">Tehnologies</h3>
-            <p className="max-w-[35rem] text-20 font-medium">Remix, React</p>
+            <h3 className="mb-1 text-24 font-bold text-zinc-100">Objective</h3>
+            <p className="max-w-[35rem] text-20 font-medium">
+              {document.data.objective}
+            </p>
+          </li>
+          <li>
+            <h3 className="mb-1 text-24 font-bold text-zinc-100">
+              Tehnologies
+            </h3>
+            <p className="max-w-[35rem] text-20 font-medium">
+              {document.data.tehnologies}
+            </p>
           </li>
         </ul>
       </section>
+
       <section className="mb-20">
-        <img src={Start} alt="" className="mb-8 w-full rounded-40" />
+        <img
+          src={document.data.project_images[0].image.url}
+          alt=""
+          className="mb-8 w-full rounded-40"
+        />
 
         <div className="mb-8 grid w-full grid-cols-project-45/55 gap-8">
           <img
-            src={HomePage}
+            src={document.data.project_images[1].image.url}
             alt=""
             className="h-[50rem] w-full rounded-40 object-cover object-top"
           />
           <img
-            src={SearchPage}
+            src={document.data.project_images[2].image.url}
             alt=""
             className="h-[50rem] w-full rounded-40 object-cover object-top"
           />
@@ -64,64 +77,31 @@ const ProjectPage = () => {
 
         <div className="grid w-full grid-cols-project-55/45 gap-8">
           <img
-            src={PlayPage}
+            src={document.data.project_images[3].image.url}
             alt=""
             className="h-[50rem] w-full rounded-40 object-cover object-top"
           />
           <img
-            src={ProfilePage}
+            src={document.data.project_images[4].image.url}
             alt=""
             className="h-[50rem] w-full rounded-40 object-cover object-top"
           />
         </div>
       </section>
 
-      <StickySection
-        title={
-          <h2 className="sticky top-44 text-40 ">
-            Project <span className=" text-zinc-100">Overview</span>
-          </h2>
-        }
-        content={
-          <div className="max-w-[97rem]">
-            <p className="mb-12 text-24 text-zinc-100">
-              Egestas dui id ornare arcu odio. Ornare lectus sit amet est
-              placerat in egestas erat imperdiet. Aenean vel elit scelerisque
-              mauris pellentesque pulvinar. Mauris a diam maecenas sed enim ut
-              sem viverra. Posuere mori leo urna molestie at. Cras tincidunt
-              lobortis feugiat vivamus at augue eget arcu dictum. Aliquet
-              bibendu enfacilisis gravida neque convallis a. At urna condimentum
-              mattis pellentesque id nibh tortor id aliquet.
-            </p>
-
-            <img src={GamePage} alt="" className="rounded-40" />
-          </div>
-        }
+      <ProjectInfo
+        execution={document.data.execution}
+        overview={document.data.project_overview}
       />
 
-      <StickySection
-        title={
-          <h2 className="sticky top-44 text-40 text-zinc-100">Execution</h2>
-        }
-        content={
-          <p className="mb-12 max-w-[97rem] text-24 text-zinc-100">
-            Egestas dui id ornare arcu odio. Ornare lectus sit amet est placerat
-            in egestas erat imperdiet. Aenean vel elit scelerisque mauris
-            pellentesque pulvinar. Mauris a diam maecenas sed enim ut sem
-            viverra. Posuere mori leo urna molestie at. Cras tincidunt lobortis
-            feugiat vivamus at augue eget arcu dictum. Aliquet bibendu
-            enfacilisis gravida neque convallis a. At urna condimentum mattis
-            pellentesque id nibh tortor id aliquet. Egestas dui id ornare arcu
-            odio. Ornare lectus sit amet est placerat in egestas erat imperdiet.
-            Aenean vel elit scelerisque mauris pellentesque pulvinar. Mauris a
-            diam maecenas sed enim ut sem viverra. Ornare lectus sit amet est
-            placerat in egestas erat imperdiet. Cras tincidunt lobortis feugiat
-            vivamus at augue eget arcu dictum. Posuere mori leo urna molestie
-            at. Aliquet bibendu enfacilisis gravida neque convallis a.
-          </p>
-        }
-        className="border-t border-zinc-500"
-      />
+      <a
+        href={document.data.live_url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-12 right-12 flex h-24 w-24 overflow-hidden rounded-full bg-zinc-300 p-2 transition-all hover:p-1"
+      >
+        <Arrow className="text-zinc-900" />
+      </a>
     </>
   )
 }

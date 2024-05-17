@@ -1,15 +1,16 @@
-import { ReactNode, useState } from 'react'
+/// <reference types="vite-plugin-svgr/client" />
+
+import { useState } from 'react'
+import Copy from '../assets/file-copy.svg?react'
 
 interface CopyButtonProps {
   className?: string
   tooltipClassName?: string
-  children: ReactNode
   copyValue: string
 }
 
 const CopyButton = ({
   className,
-  children,
   copyValue,
   tooltipClassName,
 }: CopyButtonProps) => {
@@ -29,11 +30,11 @@ const CopyButton = ({
       className={`fake-button relative ${className}`}
       onClick={copyToClipboard}
     >
-      {children}
-
+      <Copy className="w-8" />
+      hello@lukarakic.me
       <div
-        className={`text-14 left-1/2 -translate-x-1/2 rounded-xl absolute py-3 
-        bg-zinc-100 text-zinc-800 w-[80%] -bottom-10 transition-opacity pointer-events-none ${tooltipClassName}`}
+        className={`pointer-events-none absolute -bottom-10 left-1/2 w-[80%] -translate-x-1/2 
+        rounded-xl bg-zinc-100 py-3 text-14 text-zinc-800 transition-opacity ${tooltipClassName}`}
         style={{
           opacity: opacity,
         }}

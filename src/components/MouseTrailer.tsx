@@ -16,7 +16,7 @@ const MouseTrailer = () => {
     const y = e.clientY - ref.current?.offsetHeight / 2
 
     const keyframes = {
-      transform: `translate(${x}px, ${y}px) scale(${interacting ? 5 : 1})`,
+      transform: `translate(${x}px, ${y}px) scale(${interacting ? 3 : 1})`,
     }
 
     ref.current.animate(keyframes, {
@@ -48,7 +48,7 @@ const MouseTrailer = () => {
       <Arrow
         className={`${
           showArrow ? 'opacity-100' : 'opacity-0'
-        } transition-opacity text-zinc-800`}
+        } text-zinc-800 transition-opacity`}
       />
     </div>
   )

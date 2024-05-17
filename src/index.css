@@ -114,4 +114,32 @@
       transform: scale(1) rotate(360deg);
     }
   }
+
+  .markdown {
+    @apply text-18;
+  }
+
+  .markdown h3 {
+    @apply mb-4 text-24 font-bold text-zinc-100;
+  }
+
+  .markdown hr {
+    @apply mb-12 opacity-0;
+  }
+
+  .markdown img {
+    @apply my-8 rounded-40;
+  }
+
+  .markdown ul {
+    @apply ml-12 list-disc space-y-2;
+  }
+
+  .markdown strong {
+    @apply font-normal text-zinc-100;
+  }
+
+  .markdown em {
+    @apply not-italic text-zinc-500;
+  }
 }
