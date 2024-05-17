@@ -30,7 +30,7 @@ const HomepageLogo = () => {
         toggleActions: 'play none none reverse',
       },
       width: '15.6rem',
-      marginTop: -25,
+      marginTop: '-2.5rem',
       cursor: 'pointer',
     })
   }, [])
