@@ -19,7 +19,8 @@ const ProjectPage = () => {
         <h1 className="mb-16 mt-80 text-64 font-bold text-zinc-100">
           {document.data.name}
         </h1>
-        <ul className="mb-24 flex items-start justify-between">
+
+        <ul className="mb-24 grid grid-cols-1 items-start justify-between gap-8 xs:grid-cols-3 md:flex">
           <li>
             <h3 className="mb-1 text-24 font-bold text-zinc-100">Role</h3>
             <p className="max-w-[35rem] text-20 font-medium">
@@ -62,7 +63,7 @@ const ProjectPage = () => {
           className="mb-8 w-full rounded-40"
         />
 
-        <div className="mb-8 grid w-full grid-cols-project-45/55 gap-8">
+        <div className="mb-8 grid w-full grid-cols-1 gap-8 lg:grid-cols-project-45/55">
           <img
             src={document.data.project_images[1].image.url}
             alt=""
@@ -75,7 +76,7 @@ const ProjectPage = () => {
           />
         </div>
 
-        <div className="grid w-full grid-cols-project-55/45 gap-8">
+        <div className="grid w-full grid-cols-1 gap-8 lg:grid-cols-project-55/45">
           <img
             src={document.data.project_images[3].image.url}
             alt=""
@@ -98,7 +99,7 @@ const ProjectPage = () => {
         href={document.data.live_url}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-12 right-12 flex h-24 w-24 overflow-hidden rounded-full bg-zinc-300 p-2 transition-all hover:p-1"
+        className="fixed bottom-12 right-12 flex h-32 w-32 overflow-hidden rounded-full bg-zinc-300 p-2 transition-all hover:p-1"
       >
         <Arrow className="text-zinc-900" />
       </a>

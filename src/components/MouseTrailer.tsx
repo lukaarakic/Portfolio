@@ -39,6 +39,10 @@ const MouseTrailer = () => {
     return () => document.removeEventListener('mousemove', onMouseMove)
   }, [])
 
+  if (window.matchMedia('(pointer: coarse)').matches) {
+    return
+  }
+
   return (
     <div
       ref={ref}

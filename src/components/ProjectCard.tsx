@@ -8,9 +8,18 @@ interface ProjectCardProps {
   alt?: string
   imageUrl: string
   to: string
+  name: string
+  role: string
 }
 
-const ProjectCard = ({ className, imageUrl, alt, to }: ProjectCardProps) => {
+const ProjectCard = ({
+  className,
+  imageUrl,
+  alt,
+  to,
+  name,
+  role,
+}: ProjectCardProps) => {
   const [opacity, setOpacity] = useState(0)
   const navigate = useNavigate()
 
@@ -47,10 +56,8 @@ const ProjectCard = ({ className, imageUrl, alt, to }: ProjectCardProps) => {
         }}
       >
         <div>
-          <h4 className="text-24 font-medium">Yoga</h4>
-          <span className="text-16 text-zinc-500">
-            Web Design & Development
-          </span>
+          <h4 className="text-24 font-medium">{name}</h4>
+          <span className="text-16 text-zinc-500">{role}</span>
         </div>
 
         <ButtonLink to="/" className="cursor-none">

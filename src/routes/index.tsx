@@ -14,7 +14,7 @@ export default function Index() {
 
   return (
     <>
-      <section className="mb-60 flex h-screen flex-col items-start justify-end gap-5 pb-20">
+      <section className="mb-60 flex h-svh flex-col items-start justify-end gap-5 pb-20">
         <div className="fake-button gap-4 text-18 text-zinc-100">
           <div className="h-3 w-3 rounded-full bg-lime-500"></div>
           Available for work
@@ -36,10 +36,13 @@ export default function Index() {
         <div className="mt-20 grid grid-cols-1 gap-12 md:grid-cols-home-grid">
           {document?.map((project, i) => (
             <ProjectCard
+              key={project.data.name}
               imageUrl={project.data.mockup.url}
               to={project.slugs[0]}
-              className={`interactable h-[40rem] md:h-auto ${i == 2 ? 'col-span-full md:h-[84rem]' : ''}`}
+              className={`interactable h-[40rem] md:h-auto ${i == 2 ? 'col-span-full md:!h-[84rem]' : ''}`}
               alt={project.data.mockup.alt}
+              name={project.data.name}
+              role={project.data.role}
             />
           ))}
         </div>

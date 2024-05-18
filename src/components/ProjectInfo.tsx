@@ -13,7 +13,7 @@ const ProjectInfo = ({ execution, overview }: ProjectInfoProps) => {
         <StickySection
           className="markdown"
           title={
-            <h2 className="sticky top-44 text-40 text-zinc-500 ">
+            <h2 className="sticky top-44 mb-12 text-40 font-bold text-zinc-500">
               Project <span className=" text-zinc-100">Overview</span>
             </h2>
           }
@@ -29,7 +29,9 @@ const ProjectInfo = ({ execution, overview }: ProjectInfoProps) => {
         <StickySection
           className="markdown border-t border-zinc-500"
           title={
-            <h2 className="sticky top-44 text-40 text-zinc-100">Execution</h2>
+            <h2 className="sticky top-44 mb-12 text-40 font-bold text-zinc-100">
+              Execution
+            </h2>
           }
           content={
             <ReactMarkdown className="mb-12 max-w-[97rem]">
