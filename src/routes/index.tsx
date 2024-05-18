@@ -57,7 +57,7 @@ export default function Index() {
 
         <CardList className="flex-col gap-14 xs:grid xs:grid-cols-2 lg:flex lg:flex-row">
           <Card
-            title="UI Desgin"
+            title="UI Design"
             icon={<Layout />}
             description={`To effectively support your business with UI design, I create user-centric, brand-consistent designs that increase engagement and provide a seamless, modern experience.`}
           />

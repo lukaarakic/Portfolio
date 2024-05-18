@@ -43,7 +43,7 @@ const AboutMe = () => {
           like
         </h2>
 
-        <CardList className="xs:grid xs:grid-cols-2 flex-col gap-12 lg:flex lg:flex-row">
+        <CardList className="flex-col gap-12 xs:grid xs:grid-cols-2 lg:flex lg:flex-row">
           <Card
             title="Consulting"
             description="The first stage involves a conversation with the client to learn about his needs, goals, and vision. During this phase, we analyze the brand's qualities, target group, competitors, values, and project purpose."
@@ -70,7 +70,7 @@ const AboutMe = () => {
       <StickySection
         title={
           <h2 className="sticky top-44 mb-16 text-40 font-bold">
-            My<span className="text-zinc-100">Accomplishments</span>
+            My <span className="text-zinc-100">Accomplishments</span>
           </h2>
         }
         content={

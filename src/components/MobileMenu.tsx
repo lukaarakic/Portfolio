@@ -10,11 +10,11 @@ const MobileMenu = () => {
   tl.to('.menu-item', { x: 0, duration: 0.3, opacity: 1, stagger: 0.2 })
 
   const handleOpen = () => {
-    tl.play()
+    tl.play().totalDuration(1.2)
   }
 
   const handleClose = () => {
-    tl.reverse()
+    tl.reverse().totalDuration(0.6)
   }
 
   return (

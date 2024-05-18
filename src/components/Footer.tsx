@@ -22,15 +22,15 @@ const Footer = () => {
   }, [])
 
   return (
-    <footer className="xs:px-24 rounded-40 bg-zinc-800 px-16 py-16">
+    <footer className="rounded-40 bg-zinc-800 px-16 py-16 xs:px-24">
       <div className="pb-96">
-        <h2 className="mb-7 text-64 font-medium">
+        <h2 className="mb-7 text-40 font-medium md:text-64">
           Project in <span className="text-zinc-100">mind?</span>
         </h2>
 
-        <div className="xs:flex-row xs:items-center flex flex-col items-start gap-6 text-18 font-medium text-zinc-100">
+        <div className="flex flex-col items-start gap-6 text-18 font-medium text-zinc-100 xs:flex-row xs:items-center">
           <ContactButton />
-          <div className="xs:flex-row xs:items-center flex flex-col items-start gap-4">
+          <div className="flex flex-col items-start gap-4 xs:flex-row xs:items-center">
             <span>or copy an email: </span>
 
             <CopyButton
