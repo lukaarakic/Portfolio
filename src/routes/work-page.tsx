@@ -13,6 +13,9 @@ const WorkPage = () => {
       <section className="mb-80 grid grid-cols-1 gap-12 md:grid-cols-2">
         {document?.map((project) => (
           <ProjectCard
+            name={project.data.name}
+            role={project.data.role}
+            key={project.data.name}
             imageUrl={project.data.mockup.url}
             to={project.slugs[0]}
             className={`interactable`}
