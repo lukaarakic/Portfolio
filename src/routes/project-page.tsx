@@ -12,49 +12,29 @@ const ProjectPage = () => {
   const [document] = usePrismicDocumentByUID('project', pathname)
 
   useEffect(() => {
-    gsap.fromTo(
-      '#project-heading',
-      {
-        opacity: 0,
-      },
-      {
-        opacity: 1,
-        duration: 1.5,
-        ease: 'expo.out',
-        delay: 0.6,
-      },
-    )
+    gsap.to('#project-heading', {
+      opacity: 1,
+      duration: 1.5,
+      ease: 'expo.out',
+      delay: 0.6,
+    })
 
-    gsap.fromTo(
-      '.info-item',
-      {
-        y: '100%',
-        opacity: 0,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1.5,
-        ease: 'expo.out',
-        stagger: 0.1,
-        delay: 1,
-      },
-    )
+    gsap.to('.info-item', {
+      y: 0,
+      opacity: 1,
+      duration: 1.5,
+      ease: 'expo.out',
+      stagger: 0.1,
+      delay: 1,
+    })
 
-    gsap.fromTo(
-      '#project-images',
-      {
-        opacity: 0,
-        y: '100%',
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.5,
-        ease: 'expo.out',
-        delay: 1.5,
-      },
-    )
+    gsap.to('#project-images', {
+      opacity: 1,
+      y: 0,
+      duration: 1.5,
+      ease: 'expo.out',
+      delay: 1.5,
+    })
   }, [document])
 
   if (!document) return <div className="h-screen w-full"></div>
@@ -63,38 +43,38 @@ const ProjectPage = () => {
     <>
       <section>
         <h1
-          className="mb-16 mt-80 text-64 font-bold text-zinc-100"
+          className="mb-16 mt-80 text-64 font-bold text-zinc-100 opacity-0"
           id="project-heading"
         >
           {document.data.name}
         </h1>
 
         <ul className="mb-24 grid grid-cols-1 items-start justify-between gap-8 xs:grid-cols-3 md:flex">
-          <li className="info-item inline-block">
+          <li className="info-item translate-y-full opacity-0">
             <h3 className="mb-1 text-24 font-bold text-zinc-100">Role</h3>
             <p className="max-w-[35rem] text-20 font-medium">
               {document.data.role}
             </p>
           </li>
-          <li className="info-item">
+          <li className="info-item translate-y-full opacity-0">
             <h3 className="mb-1 text-24 font-bold text-zinc-100">Platforms</h3>
             <p className="max-w-[35rem] text-20 font-medium">
               {document.data.platform}
             </p>
           </li>
-          <li className="info-item">
+          <li className="info-item translate-y-full opacity-0">
             <h3 className="mb-1 text-24 font-bold text-zinc-100">Assignment</h3>
             <p className="max-w-[35rem] text-20 font-medium">
               {document.data.assignment}
             </p>
           </li>
-          <li className="info-item">
+          <li className="info-item translate-y-full opacity-0">
             <h3 className="mb-1 text-24 font-bold text-zinc-100">Objective</h3>
             <p className="max-w-[35rem] text-20 font-medium">
               {document.data.objective}
             </p>
           </li>
-          <li className="info-item">
+          <li className="info-item translate-y-full opacity-0">
             <h3 className="mb-1 text-24 font-bold text-zinc-100">
               Tehnologies
             </h3>
@@ -105,7 +85,7 @@ const ProjectPage = () => {
         </ul>
       </section>
 
-      <section className="mb-20" id="project-images">
+      <section className="mb-20 translate-y-full opacity-0" id="project-images">
         <img
           src={document.data.project_images[0].image.url}
           alt=""
