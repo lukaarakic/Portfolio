@@ -1,8 +1,9 @@
 import Send from '../assets/mail-send.svg?react'
 
-const ContactButton = () => {
+const ContactButton = ({ id }: { id?: string }) => {
   return (
     <a
+      id={id}
       href="mailto:hello@lukarakic.me"
       className="fake-button w-fit gap-2 bg-slate-300 text-18 font-medium text-zinc-800"
     >

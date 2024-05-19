@@ -11,39 +11,124 @@ import Layout from '../assets/layout.svg?react'
 import ETF from '../assets/about-me/ete.png'
 import RAF from '../assets/about-me/raf.png'
 import SWW from '../assets/about-me/sww.png'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import AnimatedElement from '../components/AnimatedElement'
 
 const AboutMe = () => {
+  useGSAP(() => {
+    gsap.fromTo(
+      '#about-me-heading > div > *',
+      {
+        y: '110%',
+        rotation: 5,
+      },
+      {
+        y: 0,
+        rotation: 0,
+        stagger: 0.2,
+        duration: 1.5,
+        ease: 'expo.out',
+      },
+    )
+
+    gsap.fromTo(
+      '#about-me-contact',
+      {
+        y: '200%',
+        rotation: 5,
+      },
+      {
+        y: 0,
+        rotation: 0,
+        duration: 1.5,
+        ease: 'expo.out',
+        delay: 2,
+      },
+    )
+
+    gsap.fromTo(
+      '.service-heading',
+      {
+        autoAlpha: 0,
+      },
+      {
+        autoAlpha: 1,
+        delay: 2.3,
+      },
+    )
+
+    gsap.fromTo(
+      '.services > *',
+      {
+        y: '100%',
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1.5,
+        ease: 'expo.out',
+        stagger: 0.1,
+        delay: 2.5,
+      },
+    )
+  })
+
   return (
     <>
       <section className="mb-40 mt-80 flex flex-col items-start lg:flex-row">
-        <h1 className="mb-8 flex shrink-0 flex-wrap items-center text-64 lg:mb-0 lg:max-w-[65rem]">
-          <img src={Profile} alt="" className="mr-4 inline-block w-24" /> Hello,
-          <span className="text-zinc-100">I'm Luka,</span>
-          <span className="text-zinc-100">Web Developer</span>
+        <h1
+          id="about-me-heading"
+          className="mb-8 flex shrink-0 flex-wrap items-center overflow-hidden text-64 lg:mb-0 lg:max-w-[65rem]"
+        >
+          <div className="overflow-hidden">
+            <img src={Profile} alt="" className="mr-4 inline-block w-24" />{' '}
+          </div>
+
+          <div className="overflow-hidden">
+            <span className="inline-block">Hello,</span>
+          </div>
+          <div className="overflow-hidden">
+            <span className="inline-block text-zinc-100">I'm Luka,</span>
+          </div>
+          <div className="overflow-hidden">
+            <span className="inline-block text-zinc-100">Web Developer</span>
+          </div>
         </h1>
 
         <div className="lg:pr-52">
-          <h2 className="mb-4 text-30 font-semibold text-zinc-200 lg:text-40">
-            With experience in a coding and design, I combine both fields to
+          <AnimatedElement
+            text="With experience in a coding and design, I combine both fields to
             understand the needs of brands and create websites that bring them
-            profit.
-          </h2>
-          <p className="mb-12 text-24 ">
-            Over the course of two years, I have been creating and developing.
-            There is a wide spectrum of technologies i use, from custom code to
-            no code.
-          </p>
-          <ContactButton />
+            profit."
+            id="about-me-h2"
+            delay={1}
+            Wrapper="h2"
+            className="mb-4 flex flex-wrap gap-x-4 pb-4 text-30 font-semibold leading-normal text-zinc-200 lg:text-40"
+          />
+
+          <AnimatedElement
+            delay={1}
+            id="about-me-more"
+            text=" Over the course of two years, I have been creating and developing.
+          There is a wide spectrum of technologies i use, from custom code to
+          no code."
+            className="mb-12 text-24"
+          />
+          <div className="overflow-hidden">
+            <ContactButton id="about-me-contact" />
+          </div>
         </div>
       </section>
 
       <section className="mb-32">
-        <h2 className="mb-12 text-40 font-bold">
+        <h2 className="service-heading mb-12 text-40 font-bold">
           How my <span className="text-zinc-100">service process</span> looks
           like
         </h2>
 
-        <CardList className="flex-col gap-12 xs:grid xs:grid-cols-2 lg:flex lg:flex-row">
+        <CardList className="services flex-col gap-12 xs:grid xs:grid-cols-2 lg:flex lg:flex-row">
           <Card
             title="Consulting"
             description="The first stage involves a conversation with the client to learn about his needs, goals, and vision. During this phase, we analyze the brand's qualities, target group, competitors, values, and project purpose."

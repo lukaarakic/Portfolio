@@ -4,12 +4,34 @@ import HomepageLogo from './HomepageLogo'
 import { Link, useLocation } from 'react-router-dom'
 import useWindowDimensions from '../utils/useWindowDimensions'
 import MobileMenu from './MobileMenu'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
 
 const Navbar = () => {
   const location = useLocation()
   const isHomepage = location.pathname === '/'
 
   const { width } = useWindowDimensions()
+
+  useGSAP(() => {
+    gsap.fromTo(
+      '.nav-items > *',
+      {
+        y: 60,
+        rotateX: -90,
+        rotation: 5,
+      },
+      {
+        y: 0,
+        rotateX: 0,
+        rotation: 0,
+        stagger: 0.2,
+        duration: 1.5,
+        ease: 'expo.out',
+        delay: 2,
+      },
+    )
+  })
 
   return (
     <>
@@ -18,7 +40,7 @@ const Navbar = () => {
           {isHomepage ? width > 580 ? <HomepageLogo /> : <Logo /> : <Logo />}
         </Link>
 
-        <div className="hidden items-center gap-14 text-18 md:flex">
+        <div className="nav-items hidden items-center gap-14 overflow-hidden text-18 md:flex">
           <Link to={'/about-me'}>About me</Link>
           <Link to={'/projects'}>Work</Link>
           <CopyButton copyValue="hello@lukarakic.me" />

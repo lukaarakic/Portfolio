@@ -6,26 +6,47 @@ import Shape from '../assets/shape.svg?react'
 import Layout from '../assets/layout-2.svg?react'
 import Code from '../assets/code.svg?react'
 import { useAllPrismicDocumentsByType } from '@prismicio/react'
+import AnimatedElement from '../components/AnimatedElement'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
 
 export default function Index() {
   const [document] = useAllPrismicDocumentsByType('project', {
     limit: 3,
   })
 
+  useGSAP(() => {
+    gsap.fromTo(
+      '.available-work',
+      {
+        y: 30,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        delay: 1.5,
+        duration: 1.5,
+        ease: 'expo.out',
+      },
+    )
+  })
+
   return (
     <>
       <section className="mb-60 flex h-svh flex-col items-start justify-end gap-5 pb-20">
-        <div className="fake-button gap-4 text-18 text-zinc-100">
+        <div className="available-work fake-button gap-4 text-18 text-zinc-100">
           <div className="h-3 w-3 rounded-full bg-lime-500"></div>
           Available for work
         </div>
 
-        <h2 className="max-w-[125rem] text-40 font-medium tracking-tight md:text-64">
-          I’m Luka - a <span className="text-zinc-100">web developer</span> from
-          Serbia, focusing on building functional websites that will{' '}
-          <span className="text-zinc-100">increase conversion</span> and{' '}
-          <span className="text-zinc-100">reach customers</span>
-        </h2>
+        <AnimatedElement
+          className="max-w-[125rem] text-40 font-medium tracking-tight md:text-64"
+          text="I’m Luka - a web developer from Serbia, focusing on building functional websites that will increase conversion and reach customers."
+          id="hero-heading"
+          Wrapper="h2"
+          delay={1.5}
+        />
       </section>
 
       <section className="project-section">
