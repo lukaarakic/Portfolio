@@ -38,7 +38,7 @@ const HomepageLogo = () => {
   return (
     <div
       className={
-        'logo-icon-wrapper absolute mx-auto mt-20 w-[95vw] cursor-default overflow-hidden'
+        'logo-icon-wrapper absolute mx-auto mt-[1.5vh] w-[95vw] cursor-default overflow-hidden'
       }
     >
       <LogoIcon className="logo-icon" />

@@ -83,7 +83,11 @@ const AboutMe = () => {
           className="mb-8 flex shrink-0 flex-wrap items-center overflow-hidden text-64 lg:mb-0 lg:max-w-[65rem]"
         >
           <div className="overflow-hidden">
-            <img src={Profile} alt="" className="mr-4 inline-block w-24" />{' '}
+            <img
+              src={Profile}
+              alt=""
+              className="-mt-6 mr-4 inline-block w-24"
+            />{' '}
           </div>
 
           <div className="overflow-hidden">
@@ -133,21 +137,21 @@ const AboutMe = () => {
             title="Consulting"
             description="The first stage involves a conversation with the client to learn about his needs, goals, and vision. During this phase, we analyze the brand's qualities, target group, competitors, values, and project purpose."
             icon={<Speak />}
-            className="max-w-[55rem]"
+            className="h-[25rem] max-w-[55rem]"
           />
 
           <Card
             title="Designing"
             description="I begin by creating the homepage design. This template is important since it establishes the overall design style for the entire website. I get to work on creating templates for the remaining subpages as soon as the project is accepted."
             icon={<Layout />}
-            className="max-w-[55rem]"
+            className="h-[25rem] max-w-[55rem]"
           />
 
           <Card
             title="Developing"
             description="The website's implementation is the final step. This requires experience, which is why I support the client throughout the entire process, from start to finish."
             icon={<Code />}
-            className="max-w-[55rem]"
+            className="h-[25rem] max-w-[55rem]"
           />
         </CardList>
       </section>
