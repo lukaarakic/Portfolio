@@ -23,7 +23,7 @@ const Footer = () => {
 
   return (
     <footer className="rounded-40 bg-zinc-800 px-16 py-16 xs:px-24">
-      <div className="pb-96">
+      <div className="pb-52 lg:pb-96">
         <h2 className="mb-7 text-40 font-medium md:text-64">
           Project in <span className="text-zinc-100">mind?</span>
         </h2>

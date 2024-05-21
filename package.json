@@ -14,14 +14,11 @@
     "@prismicio/client": "^7.5.0",
     "@prismicio/react": "^2.7.4",
     "@studio-freight/react-lenis": "^0.0.47",
-    "localforage": "^1.10.0",
-    "match-sorter": "^6.3.4",
+    "gsap": "^3.12.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
-    "react-router-dom": "^6.23.1",
-    "sort-by": "^1.2.0",
-    "split-type": "^0.3.4"
+    "react-router-dom": "^6.23.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
