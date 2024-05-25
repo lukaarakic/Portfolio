@@ -40,7 +40,7 @@ const Navbar = () => {
           {isHomepage ? width > 580 ? <HomepageLogo /> : <Logo /> : <Logo />}
         </Link>
 
-        <div className="nav-items hidden items-center gap-14 overflow-hidden text-18 md:flex">
+        <div className="nav-items hidden items-center gap-14 text-18 md:flex">
           <Link to={'/about-me'}>About me</Link>
           <Link to={'/projects'}>Work</Link>
           <CopyButton copyValue="hello@lukarakic.me" />
