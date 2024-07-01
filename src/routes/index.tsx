@@ -60,7 +60,7 @@ export default function Index() {
               key={project.data.name}
               imageUrl={project.data.mockup.url}
               to={project.slugs[0]}
-              className={`interactable h-[40rem] md:h-auto ${i == 2 ? 'col-span-full md:!h-[84rem]' : ''}`}
+              className={`interactable h-[40rem] md:h-auto lg:h-[60rem] ${i == 2 ? 'col-span-full md:!h-[84rem]' : ''}`}
               alt={project.data.mockup.alt}
               name={project.data.name}
               role={project.data.role}

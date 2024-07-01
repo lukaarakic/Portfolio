@@ -45,7 +45,7 @@ const ProjectCard = ({
       <img
         src={imageUrl}
         alt={alt}
-        className="w-full rounded-40 object-cover"
+        className="w-full rounded-40 object-cover object-center"
       />
 
       <div
