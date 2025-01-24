@@ -46,7 +46,7 @@ const Footer = () => {
         <div>
           <div className="text-18 font-medium">Copyright</div>
           <div className="text-16 font-bold text-zinc-100">
-            2024 © Luka Rakic
+            2025 © Luka Rakic
           </div>
         </div>
 

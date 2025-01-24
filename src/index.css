@@ -81,6 +81,22 @@
 }
 
 @layer components {
+  .underline-hover {
+    @apply relative inline-block text-18 text-zinc-100;
+  }
+
+  .underline-hover::before {
+    @apply absolute -bottom-1 w-full bg-zinc-100;
+    content: '';
+    height: 2px;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .underline-hover:hover::before {
+    transform: scaleX(1);
+  }
+
   .rounded-background {
     @apply rounded-40 bg-zinc-800;
   }

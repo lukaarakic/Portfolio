@@ -33,8 +33,8 @@ const CopyButton = ({
       <Copy className="w-8" />
       hello@lukarakic.me
       <div
-        className={`pointer-events-none absolute -bottom-10 left-1/2 w-[80%] -translate-x-1/2 
-        rounded-xl bg-zinc-100 py-3 text-14 text-zinc-800 transition-opacity ${tooltipClassName}`}
+        className={`pointer-events-none absolute -bottom-10 left-1/2 w-[80%] -translate-x-1/2
+          rounded-xl bg-zinc-100 py-3 text-14 text-zinc-800 transition-opacity ${tooltipClassName}`}
         style={{
           opacity: opacity,
         }}

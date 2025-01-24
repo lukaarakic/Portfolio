@@ -41,8 +41,12 @@ const Navbar = () => {
         </Link>
 
         <div className="nav-items hidden items-center gap-14 text-18 md:flex">
-          <Link to={'/about-me'}>About me</Link>
-          <Link to={'/projects'}>Work</Link>
+          <Link to={'/about-me'} className="underline-hover">
+            About me
+          </Link>
+          <Link to={'/projects'} className="underline-hover">
+            Work
+          </Link>
           <CopyButton copyValue="hello@lukarakic.me" />
         </div>
 
