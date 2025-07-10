@@ -81,7 +81,7 @@
 }
 
 @layer components {
-  .underline-hover {
+  /* .underline-hover {
     @apply relative inline-block text-18 text-zinc-100;
   }
 
@@ -95,6 +95,16 @@
 
   .underline-hover:hover::before {
     transform: scaleX(1);
+  } */
+
+  .underline {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: white;
   }
 
   .rounded-background {

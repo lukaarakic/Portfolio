@@ -2,8 +2,8 @@ import StickySection from './StickySection'
 import ReactMarkdown from 'react-markdown'
 
 interface ProjectInfoProps {
-  overview: string
-  execution: string
+  overview?: string
+  execution?: string
 }
 
 const ProjectInfo = ({ execution, overview }: ProjectInfoProps) => {

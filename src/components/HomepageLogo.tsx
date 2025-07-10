@@ -2,11 +2,41 @@ import LogoIcon from '../assets/Logo.svg?react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useEffect, useState } from 'react'
 
 gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollTrigger)
 
+const calcPosition = () => {
+  const availableWork = document.querySelector('.available-work')
+  const introText = document.querySelector('.intro-text')
+  const logoHeight =
+    document.querySelector('.logo-icon-wrapper')?.clientHeight || 500
+
+  if (availableWork && introText) {
+    console.log(
+      availableWork.getBoundingClientRect().height +
+        introText.getBoundingClientRect().height +
+        logoHeight,
+    )
+
+    return (
+      availableWork.getBoundingClientRect().height +
+      introText.getBoundingClientRect().height +
+      110
+    )
+  }
+}
+
 const HomepageLogo = () => {
+  const [height, setHeight] = useState(() => {
+    return calcPosition()
+  })
+
+  useEffect(() => {
+    setHeight(calcPosition)
+  }, [])
+
   useGSAP(() => {
     gsap.fromTo(
       '.logo-icon path',
@@ -30,16 +60,20 @@ const HomepageLogo = () => {
         toggleActions: 'play none none reverse',
       },
       width: '15.6rem',
-      marginTop: '-2.5rem',
+      top: '1rem',
+      left: '5rem',
+      bottom: 'auto',
       cursor: 'pointer',
+      immediateRender: false,
     })
   }, [])
 
   return (
     <div
-      className={
-        'logo-icon-wrapper absolute mx-auto mt-[1.5vh] w-[95vw] cursor-default overflow-hidden'
-      }
+      className={`logo-icon-wrapper fixed z-50 mx-auto mt-[2vh] w-[95%] max-w-[2500px] cursor-default overflow-hidden`}
+      style={{
+        bottom: `${height}px`,
+      }}
     >
       <LogoIcon className="logo-icon" />
     </div>

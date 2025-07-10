@@ -26,7 +26,7 @@ const Root = () => {
           <Navbar />
         </header>
 
-        <main>
+        <main className="h-full">
           <Outlet />
         </main>
 
