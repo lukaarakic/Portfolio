@@ -5,7 +5,6 @@ import { useEffect, useState, useRef } from 'react'
 import { client, urlFor } from '../utils/sanity'
 import { Project } from '../typing'
 
-// Mapping for filter display names to actual category values
 const filterToCategory = {
   Webflow: 'webflow',
   'Custom Code': 'custom-code',
@@ -57,6 +56,20 @@ const WorkPage = () => {
 
     if (isFirstRender.current) {
       isFirstRender.current = false
+      gsap.fromTo(
+        '#work-projects',
+        {
+          opacity: 0,
+          y: 50,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+          delay: 0.3,
+        },
+      )
       return
     }
 
