@@ -5,19 +5,38 @@ import CardList from '../components/card-module/CardList'
 import Shape from '../assets/shape.svg?react'
 import Layout from '../assets/layout-2.svg?react'
 import Code from '../assets/code.svg?react'
-import { useAllPrismicDocumentsByType } from '@prismicio/react'
 import AnimatedElement from '../components/AnimatedElement'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import HomepageLogo from '../components/HomepageLogo'
 import useWindowDimensions from '../utils/useWindowDimensions'
+import { useEffect, useState } from 'react'
+import { Project } from '../typing'
+import { client, urlFor } from '../utils/sanity'
 
 export default function Index() {
   const { width } = useWindowDimensions()
 
-  const [document] = useAllPrismicDocumentsByType('project', {
-    limit: 3,
-  })
+  const [projects, setProjects] = useState<Project[] | null>(null)
+
+  useEffect(() => {
+    async function fetchProjects() {
+      const projects = await client.fetch(
+        `*[_type == "Project"] | order(_createdAt desc)[0...3]`,
+      )
+
+      if (!projects) {
+        throw new Response('Not Found', {
+          status: 404,
+          statusText: 'Project not found',
+        })
+      }
+
+      setProjects(projects)
+    }
+
+    fetchProjects()
+  }, [])
 
   useGSAP(() => {
     gsap.fromTo(
@@ -56,37 +75,43 @@ export default function Index() {
       </section>
 
       <section className="project-section h-full">
-        <h3 className="text-40 font-medium">
+        <h3 className="mb-8 text-40 font-medium">
           Latest <span className="text-zinc-100">Projects</span>
         </h3>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
-          {document?.[0] && (
+          {projects?.[0] && (
             <ProjectCard
-              key={document[0].data.name}
-              imageUrl={document[0].data.mockup.url}
-              to={document[0].slugs[0]}
-              className="interactable col-span-1 md:col-span-7"
-              alt={document[0].data.mockup.alt}
-              name={document[0].data.name}
-              role={document[0].data.role}
+              key={projects[0]._id}
+              imageUrl={
+                projects[0].mockup?.asset
+                  ? urlFor(projects[0].mockup.asset).url()
+                  : ''
+              }
+              to={projects[0].slug?.current || ''}
+              alt={'Project mockup'}
+              name={projects[0].title ?? ''}
+              role={projects[0].role ?? ''}
+              className="interactable col-span-1 md:col-span-7 2xl:max-h-[85.5rem]"
             />
           )}
 
-          <div className="grid w-full grid-rows-2 gap-6 md:col-span-5 md:grid-cols-1">
-            {document
-              ?.slice(1, 3)
-              .map((project) => (
-                <ProjectCard
-                  key={project.data.name}
-                  imageUrl={project.data.mockup.url}
-                  to={project.slugs[0]}
-                  className="interactable aspect-[16/10] w-full overflow-hidden md:max-h-[40rem]"
-                  alt={project.data.mockup.alt}
-                  name={project.data.name}
-                  role={project.data.role}
-                />
-              ))}
+          <div className="flex w-full flex-col gap-6 md:col-span-5 md:grid-cols-1">
+            {projects?.slice(1, 3).map((project) => (
+              <ProjectCard
+                key={project._id}
+                imageUrl={
+                  project.mockup?.asset
+                    ? urlFor(project.mockup.asset).url()
+                    : ''
+                }
+                to={project.slug?.current || ''}
+                className="interactable w-full overflow-hidden last-of-type:mt-auto 2xl:max-h-[42rem]"
+                alt={'Project mockup'}
+                name={project.title ?? ''}
+                role={project.role ?? ''}
+              />
+            ))}
           </div>
         </div>
       </section>

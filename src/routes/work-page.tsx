@@ -1,10 +1,12 @@
 import ProjectCard from '../components/ProjectCard'
-import { useAllPrismicDocumentsByType } from '@prismicio/react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
+import { useEffect, useState } from 'react'
+import { client, urlFor } from '../utils/sanity'
+import { Project } from '../typing'
 
 const WorkPage = () => {
-  const [document] = useAllPrismicDocumentsByType('project')
+  const [projects, setProjects] = useState<Project[] | null>(null)
 
   useGSAP(() => {
     gsap.fromTo(
@@ -36,6 +38,23 @@ const WorkPage = () => {
     )
   })
 
+  useEffect(() => {
+    async function fetchProjects() {
+      const projects = await client.fetch(`*[_type == "Project"]`)
+
+      if (!projects) {
+        throw new Response('Not Found', {
+          status: 404,
+          statusText: 'Project not found',
+        })
+      }
+
+      setProjects(projects)
+    }
+
+    fetchProjects()
+  }, [])
+
   return (
     <>
       <h1 className="mb-32 mt-80 text-64 leading-none" id="work-heading">
@@ -46,15 +65,17 @@ const WorkPage = () => {
         className="mb-80 grid min-h-screen grid-cols-1 gap-12 md:grid-cols-2"
         id="work-projects"
       >
-        {document?.map((project) => (
+        {projects?.map((project) => (
           <ProjectCard
-            name={project.data.name}
-            role={project.data.role}
-            key={project.data.name}
-            imageUrl={project.data.mockup.url}
-            to={project.slugs[0]}
-            className={`interactable h-auto lg:h-[70rem]`}
-            alt={project.data.mockup.alt}
+            key={project._id}
+            imageUrl={
+              project.mockup?.asset ? urlFor(project.mockup.asset).url() : ''
+            }
+            to={project.slug?.current || ''}
+            className="interactable w-full overflow-hidden"
+            alt={'Project mockup'}
+            name={project.title ?? ''}
+            role={project.role ?? ''}
           />
         ))}
       </section>
