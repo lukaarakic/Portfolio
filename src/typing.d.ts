@@ -47,6 +47,7 @@ export type Project = {
     _type: 'image'
     _key: string
   }>
+  category?: 'webflow' | 'custom-code'
   role?: string
   platform?: string
   liveUrl?: string
