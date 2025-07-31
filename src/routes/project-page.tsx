@@ -3,7 +3,6 @@ import Arrow from '../assets/arrow-right-up.svg?react'
 import ProjectInfo from '../components/ProjectInfo'
 import gsap from 'gsap'
 import { useEffect, useState } from 'react'
-import Masonry from 'react-masonry-css'
 import { client, urlFor } from '../utils/sanity'
 import { Project } from '../typing'
 
@@ -115,11 +114,7 @@ export default function ProjectPage() {
             className="mb-20 min-h-[50vh] translate-y-full opacity-0"
             id="project-images"
           >
-            <Masonry
-              breakpointCols={{ default: 3, 1024: 2, 640: 1 }}
-              className="flex w-full gap-6"
-              columnClassName="space-y-6"
-            >
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {project.projectImages?.map((img) => (
                 <div
                   key={img._key}
@@ -134,7 +129,7 @@ export default function ProjectPage() {
                   )}
                 </div>
               ))}
-            </Masonry>
+            </div>
           </section>
 
           <ProjectInfo
