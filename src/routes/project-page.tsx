@@ -112,7 +112,7 @@ export default function ProjectPage() {
           </section>
 
           <section
-            className="mb-20 translate-y-full opacity-0"
+            className="mb-20 min-h-[50vh] translate-y-full opacity-0"
             id="project-images"
           >
             <Masonry
