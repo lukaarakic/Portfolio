@@ -20,11 +20,12 @@ const CompetitionBar = ({
           <span className="text-16 ">{place}</span>
         </div>
       </div>
+
       <a
         href={linkTo}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-nowrap text-18 underline hover:no-underline"
+        className="text-nowrap text-18"
       >
         Read more
       </a>

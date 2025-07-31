@@ -2,7 +2,7 @@ import ContactButton from '../components/ContactButton'
 import Card from '../components/card-module/Card'
 import CardList from '../components/card-module/CardList'
 import StickySection from '../components/StickySection'
-import CompetitionBar from '../components/about-me/ConmpetitionBar'
+import CompetitionBar from '../components/about-me/CompetitionBar'
 
 import Profile from '../assets/about-me/profile.png'
 import Speak from '../assets/about-me/speak.svg?react'
