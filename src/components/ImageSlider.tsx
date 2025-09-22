@@ -26,10 +26,15 @@ export default function ImageSlider({
   const [currentIndex, setCurrentIndex] = useState(initialIndex)
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [touchEnd, setTouchEnd] = useState<number | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     setCurrentIndex(initialIndex)
   }, [initialIndex])
+
+  useEffect(() => {
+    setIsLoading(true)
+  }, [currentIndex])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -55,12 +60,16 @@ export default function ImageSlider({
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
+      // Prevent zoom on mobile when double tapping
+      document.body.style.touchAction = 'none'
     } else {
       document.body.style.overflow = 'unset'
+      document.body.style.touchAction = 'auto'
     }
 
     return () => {
       document.body.style.overflow = 'unset'
+      document.body.style.touchAction = 'auto'
     }
   }, [isOpen])
 
@@ -77,7 +86,7 @@ export default function ImageSlider({
   }
 
   // Touch handling for swipe gestures
-  const minSwipeDistance = 50
+  const minSwipeDistance = 30 // Reduced for better mobile sensitivity
 
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null)
@@ -104,61 +113,92 @@ export default function ImageSlider({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-4 md:p-0">
       {/* Close button */}
       <button
         onClick={onClose}
-        className="absolute right-4 top-4 z-10 rounded-full bg-zinc-800 p-2 text-zinc-100 transition-colors hover:bg-zinc-700 md:right-6 md:top-6 md:p-3"
+        className="absolute right-2 top-2 z-10 rounded-full bg-zinc-800 p-2 text-zinc-100 transition-colors hover:bg-zinc-700 md:right-6 md:top-6 md:p-3"
       >
         <CloseIcon className="h-5 w-5 md:h-6 md:w-6" />
       </button>
 
       {/* Previous button */}
       {images.length > 1 && (
-        <button
-          onClick={goToPrevious}
-          className="absolute left-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-zinc-800 text-xl text-zinc-100 transition-colors hover:bg-zinc-700 md:left-6 md:h-12 md:w-12 md:text-2xl"
-        >
-          ‹
-        </button>
+        <>
+          {/* Mobile: Bottom navigation */}
+          <button
+            onClick={goToPrevious}
+            className="absolute bottom-20 left-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-zinc-800 bg-opacity-90 text-2xl text-zinc-100 transition-colors hover:bg-opacity-100 md:hidden"
+          >
+            ‹
+          </button>
+          {/* Desktop: Side navigation */}
+          <button
+            onClick={goToPrevious}
+            className="absolute left-2 top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full bg-zinc-800 bg-opacity-80 text-2xl text-zinc-100 transition-colors hover:bg-opacity-100 md:left-6 md:flex"
+          >
+            ‹
+          </button>
+        </>
       )}
 
       {/* Next button */}
       {images.length > 1 && (
-        <button
-          onClick={goToNext}
-          className="absolute right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-zinc-800 text-xl text-zinc-100 transition-colors hover:bg-zinc-700 md:right-6 md:h-12 md:w-12 md:text-2xl"
-        >
-          ›
-        </button>
+        <>
+          {/* Mobile: Bottom navigation */}
+          <button
+            onClick={goToNext}
+            className="absolute bottom-20 right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-zinc-800 bg-opacity-90 text-2xl text-zinc-100 transition-colors hover:bg-opacity-100 md:hidden"
+          >
+            ›
+          </button>
+          {/* Desktop: Side navigation */}
+          <button
+            onClick={goToNext}
+            className="absolute right-2 top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full bg-zinc-800 bg-opacity-80 text-2xl text-zinc-100 transition-colors hover:bg-opacity-100 md:right-6 md:flex"
+          >
+            ›
+          </button>
+        </>
       )}
 
       {/* Image container */}
       <div
-        className="relative max-h-[90vh] max-w-[90vw] overflow-hidden"
+        className="relative mx-4 max-h-[85vh] max-w-full overflow-hidden md:mx-0 md:max-h-[90vh] md:max-w-[90vw]"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
+        {/* Loading indicator */}
+        {isLoading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-zinc-900">
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-300 border-t-transparent"></div>
+          </div>
+        )}
+
         {currentImage?.asset && (
           <img
             src={urlFor(currentImage.asset).url()}
             alt={currentImage.caption || 'Project screenshot'}
-            className="max-h-full max-w-full object-contain"
+            className="max-h-full max-w-full object-contain transition-opacity duration-200"
+            draggable={false}
+            onLoad={() => setIsLoading(false)}
+            onLoadStart={() => setIsLoading(true)}
+            style={{ opacity: isLoading ? 0 : 1 }}
           />
         )}
       </div>
 
       {/* Image counter */}
       {images.length > 1 && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-zinc-800 px-4 py-2 text-zinc-100">
+        <div className="absolute bottom-32 left-1/2 -translate-x-1/2 rounded-full bg-zinc-800 bg-opacity-90 px-3 py-1 text-sm text-zinc-100 md:bottom-6 md:px-4 md:py-2 md:text-base">
           {currentIndex + 1} / {images.length}
         </div>
       )}
 
       {/* Image caption */}
       {currentImage?.caption && (
-        <div className="absolute bottom-20 left-1/2 max-w-md -translate-x-1/2 rounded-lg bg-zinc-800 px-4 py-2 text-center text-zinc-100">
+        <div className="absolute bottom-12 left-4 right-4 rounded-lg bg-zinc-800 bg-opacity-90 px-3 py-2 text-center text-sm text-zinc-100 md:bottom-20 md:left-1/2 md:right-auto md:max-w-md md:-translate-x-1/2 md:px-4 md:text-base">
           {currentImage.caption}
         </div>
       )}
