@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Marquee from './Marquee'
 import AnimatedLink from './AnimatedLink'
+import Logo from '/src/logo.svg?react'
 
 const Footer = () => {
   const [isSticky, setIsSticky] = useState(false)
@@ -58,7 +59,7 @@ const Footer = () => {
 
         <div className="flex w-fit pb-32">
           <div className="border border-slate-100/50 p-6 text-40 font-bold leading-none text-sky-500">
-            R
+            <Logo className="w-16" />
           </div>
 
           <div className="grid grid-rows-2 items-center">
