@@ -16,6 +16,8 @@ gsap.registerPlugin(ScrollTrigger)
 export default function Index() {
   const [projects, setProjects] = useState<Project[] | null>(null)
   const loadingScreenRef = useRef<HTMLDivElement>(null)
+  const letterLRef = useRef<HTMLSpanElement>(null)
+  const letterRRef = useRef<HTMLSpanElement>(null)
   const photoRef = useRef<HTMLImageElement>(null)
   const arrowRef = useRef<HTMLDivElement>(null)
   const capabilityRefs = useRef<(HTMLDivElement | null)[]>([])
@@ -47,15 +49,55 @@ export default function Index() {
       } catch (error) {
         console.error('Error fetching projects:', error)
       } finally {
-        setTimeout(() => {
-          if (loadingScreenRef.current) {
-            gsap.to(loadingScreenRef.current, {
+        // Animate the loading screen
+        setupLoadingAnimation()
+      }
+    }
+
+    const setupLoadingAnimation = () => {
+      const letterL = letterLRef.current
+      const letterR = letterRRef.current
+      const loadingScreen = loadingScreenRef.current
+
+      if (letterL && letterR && loadingScreen) {
+        // Initially hide both letters and position R at L's position
+        gsap.set([letterL, letterR], { opacity: 0 })
+        gsap.set(letterR, {
+          x: -200, // Start R from L's position (adjust based on letter spacing)
+          opacity: 0,
+          visibility: 'hidden', // Completely hide R initially
+        })
+
+        const tl = gsap.timeline()
+
+        // Show letter L first
+        tl.to(letterL, {
+          opacity: 1,
+          duration: 0.5,
+          ease: 'power2.out',
+        })
+          // Wait a bit, then make R visible and animate it from L's position
+          .set(letterR, { visibility: 'visible' })
+          .to(
+            letterR,
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.8,
+              ease: 'power2.out',
+            },
+            '+=0.3',
+          )
+          // Wait, then slide the entire loading screen up
+          .to(
+            loadingScreen,
+            {
               y: '-100%',
               duration: 1,
               ease: 'power2.inOut',
-            })
-          }
-        }, 500)
+            },
+            '+=0.5',
+          )
       }
     }
 
@@ -162,12 +204,19 @@ export default function Index() {
     <>
       <div
         ref={loadingScreenRef}
-        className="fixed inset-0 z-50 grid grid-cols-4 bg-[#2d2d2f]"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950"
       >
-        <div className="border-r border-dashed border-slate-100/25"></div>
-        <div className="border-r border-dashed border-slate-100/25"></div>
-        <div className="border-r border-dashed border-slate-100/25"></div>
-        <div />
+        <div
+          className="flex items-center gap-8 font-bold"
+          style={{ fontSize: '50rem' }}
+        >
+          <span ref={letterLRef} className="text-white opacity-0">
+            L
+          </span>
+          <span ref={letterRRef} className="invisible text-sky-500 opacity-0">
+            R
+          </span>
+        </div>
       </div>
       <main className="relative z-10">
         <div className="animate-fadeIn">
