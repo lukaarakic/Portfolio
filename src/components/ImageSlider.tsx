@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { urlFor } from '../utils/sanity'
-import { CloseIcon } from './SVGIcons'
+import CloseIcon from '../assets/close.svg?react'
 
 interface ImageSliderProps {
   images: Array<{

@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 
-import { MenuIcon, CloseIcon } from './SVGIcons'
+import Menu from '../assets/menu.svg?react'
+import CloseSVG from '../assets/close.svg?react'
 
 const MobileMenu = () => {
   const tl = gsap.timeline({ paused: true })
@@ -22,13 +23,13 @@ const MobileMenu = () => {
         className="flex items-center gap-4 rounded-40 border border-white px-12 py-4 text-24 md:hidden"
         onClick={handleOpen}
       >
-        <MenuIcon className="w-10" /> Menu
+        <Menu className="w-10" /> Menu
       </button>
 
       <div
         className={`menu fixed left-0 top-0 z-40 flex h-dvh w-full translate-x-full items-end bg-zinc-950 p-20`}
       >
-        <CloseIcon
+        <CloseSVG
           className="fixed right-24 top-14 z-50 w-20 cursor-pointer text-zinc-100"
           onClick={handleClose}
         />

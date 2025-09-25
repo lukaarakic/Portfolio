@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom'
-import { ArrowRightUpIcon } from '../components/SVGIcons'
+import Arrow from '../assets/arrow-right-up.svg?react'
 import ProjectInfo from '../components/ProjectInfo'
 import ImageSlider from '../components/ImageSlider'
 import gsap from 'gsap'
@@ -165,7 +165,7 @@ export default function ProjectPage() {
             rel="noopener noreferrer"
             className="fixed bottom-12 right-12 flex h-32 w-32 overflow-hidden rounded-full bg-zinc-300 p-2 transition-all hover:p-1"
           >
-            <ArrowRightUpIcon className="text-zinc-900" />
+            <Arrow className="text-zinc-900" />
           </a>
 
           {/* Image Slider Modal */}

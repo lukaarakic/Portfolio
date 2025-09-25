@@ -3,7 +3,7 @@ import { Project } from '../typing'
 import { client, urlFor } from '../utils/sanity'
 import Badge from '../components/Badge'
 import Noise from '../assets/noise.png'
-import { ArrowDownIcon } from '../components/SVGIcons'
+import ArrowDown from '../assets/arrow-down.svg?react'
 import ProjectCard from '../components/ProjectCard'
 import BubbleButton from '../components/BubbleButton'
 import MyPhoto from '../assets/myphoto.webp'
@@ -243,7 +243,7 @@ export default function Index() {
 
             <div className="absolute bottom-20 left-20 flex items-center gap-4 text-zinc-500">
               <div ref={arrowRef} className="aspect-square w-10">
-                <ArrowDownIcon className="aspect-square w-10" />
+                <ArrowDown className="aspect-square w-10" />
               </div>
               <span className="text-20 font-medium text-zinc-100">
                 Scroll to projects
