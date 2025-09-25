@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import MobileMenu from './MobileMenu'
-import Logo from '../assets/logo.svg?react'
+import Logo from '../../public/logo.svg?react'
 import { useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
