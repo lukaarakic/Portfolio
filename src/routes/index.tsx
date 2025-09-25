@@ -60,10 +60,14 @@ export default function Index() {
       const loadingScreen = loadingScreenRef.current
 
       if (letterL && letterR && loadingScreen) {
+        // Calculate responsive offset based on screen width
+        const isMobile = window.innerWidth < 640
+        const xOffset = isMobile ? -120 : -200
+
         // Initially hide both letters and position R at L's position
         gsap.set([letterL, letterR], { opacity: 0 })
         gsap.set(letterR, {
-          x: -200, // Start R from L's position (adjust based on letter spacing)
+          x: xOffset, // Responsive offset based on screen size
           opacity: 0,
           visibility: 'hidden', // Completely hide R initially
         })
@@ -206,10 +210,7 @@ export default function Index() {
         ref={loadingScreenRef}
         className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950"
       >
-        <div
-          className="flex items-center gap-8 font-bold"
-          style={{ fontSize: '50rem' }}
-        >
+        <div className="flex items-center gap-4 text-[20vw] font-bold sm:gap-8 sm:text-[16.5vw]">
           <span ref={letterLRef} className="text-white opacity-0">
             L
           </span>
@@ -225,7 +226,7 @@ export default function Index() {
             alt=""
             className="absolute inset-0 -z-10 h-screen w-screen opacity-30"
           />
-          <section className="hero-gradient relative flex h-svh items-center justify-items-center px-20 pt-[20rem]">
+          <section className="hero-gradient relative flex h-svh items-center justify-items-center overflow-hidden px-20 pt-[20rem]">
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
               <div className="h-[74rem] w-[74rem] rounded-full border border-slate-100"></div>
 
@@ -235,9 +236,9 @@ export default function Index() {
             </div>
             <h1 className="-mt-[20rem] text-[16.5vw] font-bold uppercase leading-[69%] text-zinc-100">
               <span className="mb-16 inline-block">Luka</span>
-              <div className="start flex items-end gap-8">
+              <div className="start flex shrink-0 flex-col-reverse items-end gap-8 md:flex-row">
                 <Badge>Available now</Badge>
-                <div className="ml-[54rem]">Rakić</div>
+                <div className="ml-[15vw] md:ml-[20vw] lg:ml-[25vw]">Rakić</div>
               </div>
             </h1>
 
@@ -245,13 +246,14 @@ export default function Index() {
               <div ref={arrowRef} className="aspect-square w-10">
                 <ArrowDown className="aspect-square w-10" />
               </div>
-              <span className="text-20 font-medium text-zinc-100">
+              <span className="whitespace-nowrap break-keep text-20 font-medium text-zinc-100">
                 Scroll to projects
               </span>
             </div>
           </section>
-          <section className="mb-20 grid grid-cols-2 px-20">
-            <div className="w-[80%]">
+
+          <section className="mb-20 flex flex-col-reverse px-20 lg:grid lg:grid-cols-2">
+            <div className="lg:w-[80%]">
               {projects?.map((project, index) => (
                 <ProjectCard
                   tags={project.tags ?? []}
@@ -281,10 +283,10 @@ export default function Index() {
 
           <section
             id="about"
-            className="sticky top-0 h-svh bg-slate-100 px-20 text-zinc-950"
+            className="sticky top-0 min-h-svh bg-slate-100 px-20 text-zinc-950"
           >
-            <div className="flex shrink-0 flex-col gap-60 pt-40">
-              <h2 className="w-[70%] text-64 font-medium">
+            <div className="flex shrink-0 flex-col gap-40 pt-40 lg:gap-60">
+              <h2 className="text-40 font-medium lg:w-[70%] lg:text-64">
                 Luka here! I{' '}
                 <span className="highlight">design and develop</span> custom
                 Webflow sites that are not only{' '}
@@ -292,8 +294,8 @@ export default function Index() {
                 <span className="highlight">growth</span> for your business.
               </h2>
 
-              <div className="ml-auto mr-[7%] flex items-start gap-40">
-                <p className="max-w-[44rem] text-24 font-medium">
+              <div className="ml-auto flex flex-col items-start gap-20 lg:mr-[7%] lg:flex-row lg:gap-40">
+                <p className="text-24 font-medium lg:max-w-[44rem]">
                   Many websites look good but fail to deliver results.
                   <br />
                   <br />I design and build Webflow websites that combine unique
@@ -304,19 +306,19 @@ export default function Index() {
                   ref={photoRef}
                   src={MyPhoto}
                   alt="Selfie of Luka Rakić"
-                  className="w-[40rem] object-cover"
+                  className="w-full object-cover lg:w-[40rem]"
                 />
               </div>
             </div>
           </section>
-          <div className="h-[40rem]" aria-hidden />
+          <div className="h-[60rem] lg:h-[40rem]" aria-hidden />
 
           <section
             id="last-section"
-            className="sticky top-0 z-30 h-svh bg-zinc-950 px-20 py-40"
+            className="sticky top-0 z-30 min-h-svh bg-zinc-950 px-20 py-40"
           >
             <Badge>Capabilities</Badge>
-            <h2 className="mb-20 mt-12 max-w-[50%] text-40 font-medium">
+            <h2 className="mb-20 mt-12 w-full text-40 font-medium lg:max-w-[50%]">
               Most businesses
               <span className="text-zinc-500"> struggle to keep up</span> with
               the rapid changes in web design. I stay on top of the{' '}
@@ -331,8 +333,9 @@ export default function Index() {
             >
               Get in touch :)
             </AnimatedLink>
+
             <div className="relative">
-              <div className="absolute inset-0 grid grid-cols-3">
+              <div className="absolute inset-0 hidden lg:grid lg:grid-cols-3">
                 <div
                   ref={setLineRef(0)}
                   className="border-r border-dashed border-slate-100/25"
@@ -344,8 +347,8 @@ export default function Index() {
                 <div></div>
               </div>
 
-              <div className="relative grid grid-cols-3 border-b border-dashed border-slate-100/25">
-                <div className="px-8 pb-[50rem]">
+              <div className="relative grid grid-cols-1 border-dashed border-slate-100/25 pb-[50rem] lg:grid-cols-3 lg:border-b">
+                <div className="px-8 lg:pb-[51rem]">
                   <div
                     ref={setCapabilityRef(0)}
                     className="flex items-start gap-6"
@@ -358,7 +361,7 @@ export default function Index() {
                     </span>
                   </div>
                 </div>
-                <div className="px-8 pb-[50rem]">
+                <div className="px-8 lg:pb-[50rem]">
                   <div
                     ref={setCapabilityRef(1)}
                     className="flex items-start gap-6"
@@ -371,7 +374,7 @@ export default function Index() {
                     </span>
                   </div>
                 </div>
-                <div className="px-8 pb-[50rem]">
+                <div className="px-8 lg:pb-[50rem]">
                   <div
                     ref={setCapabilityRef(2)}
                     className="flex items-start gap-6"

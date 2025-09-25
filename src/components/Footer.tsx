@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import Marquee from './Marquee'
-// import Logo from '../assets/logo.svg?react'
 import AnimatedLink from './AnimatedLink'
 
 const Footer = () => {
@@ -58,8 +57,8 @@ const Footer = () => {
         </ul>
 
         <div className="flex w-fit pb-32">
-          <div className="border border-slate-100/50 p-6">
-            {/* <Logo className="w-14" /> */}
+          <div className="border border-slate-100/50 p-6 text-40 font-bold leading-none text-sky-500">
+            R
           </div>
 
           <div className="grid grid-rows-2 items-center">

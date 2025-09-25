@@ -36,9 +36,9 @@ const MobileMenu = () => {
 
         <ul className="space-y-10">
           <li className="menu-item translate-x-12 opacity-0">
-            <Link to={'/about-me'} className="text-64" onClick={handleClose}>
+            <a href="#about" className="text-64" onClick={handleClose}>
               About me
-            </Link>
+            </a>
           </li>
           <li className="menu-item translate-x-12 opacity-0">
             <Link to={'/projects'} className="text-64" onClick={handleClose}>
