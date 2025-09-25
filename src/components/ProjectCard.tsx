@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import ArrowUpRight from '../assets/arrow-right-up.svg?react'
+import { ArrowRightUpIcon } from './SVGIcons'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -155,7 +155,7 @@ const ProjectCard = ({
           transform: `scale(${scale})`,
         }}
       >
-        <ArrowUpRight className="h-12 w-12 text-zinc-100" />
+        <ArrowRightUpIcon className="h-12 w-12 text-zinc-100" />
       </div>
     </article>
   )

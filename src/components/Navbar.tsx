@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import MobileMenu from './MobileMenu'
-import Logo from '../assets/logo.svg?react'
+import { LogoIcon } from './SVGIcons'
 import { useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -65,7 +65,7 @@ const Navbar = () => {
     <>
       <nav className="fixed left-0 right-0 top-0 z-40 flex items-center justify-between px-20 pt-12 text-zinc-100">
         <Link to={'/'}>
-          <Logo className="w-16" />
+          <LogoIcon className="w-16" />
         </Link>
 
         <div className="nav-items hidden items-center justify-center gap-14 rounded-10 bg-zinc-800 px-10 py-6 text-20 font-medium md:flex">

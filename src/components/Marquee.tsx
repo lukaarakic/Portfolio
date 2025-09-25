@@ -1,4 +1,4 @@
-import Send from '../assets/send.svg?react'
+import { SendIcon } from './SVGIcons'
 
 interface MarqueeProps {
   text?: string
@@ -19,7 +19,7 @@ const Marquee = ({ text = "Let's Connect", className = '' }: MarqueeProps) => {
             <span className="text-[9.6rem] font-medium text-zinc-100">
               {text}
             </span>
-            <Send className="aspect-square w-24 text-zinc-100" />
+            <SendIcon className="aspect-square w-24 text-zinc-100" />
           </div>
         ))}
     </div>
