@@ -69,12 +69,12 @@ export default function ProjectPage() {
   }, [project])
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen px-20">
       {project && (
         <>
           <section>
             <h1
-              className="mb-16 mt-80 text-64 font-bold text-zinc-100 opacity-0"
+              className="mb-16 mt-80 text-64 font-medium text-zinc-100 opacity-0"
               id="project-heading"
             >
               {project.title}
@@ -82,42 +82,32 @@ export default function ProjectPage() {
 
             <ul className="mb-24 grid grid-cols-1 items-start justify-between gap-8 xs:grid-cols-3 md:flex">
               <li className="info-item translate-y-full opacity-0">
-                <h3 className="mb-1 text-24 font-bold text-zinc-100">Role</h3>
-                <p className="max-w-[35rem] text-20 font-medium">
-                  {project.role}
-                </p>
+                <h3 className="mb-1 text-24 font-medium text-zinc-100">Role</h3>
+                <p className="max-w-[35rem] text-16">{project.role}</p>
               </li>
               <li className="info-item translate-y-full opacity-0">
-                <h3 className="mb-1 text-24 font-bold text-zinc-100">
+                <h3 className="mb-1 text-24 font-medium text-zinc-100">
                   Platforms
                 </h3>
-                <p className="max-w-[35rem] text-20 font-medium">
-                  {project.platform}
-                </p>
+                <p className="max-w-[35rem] text-16">{project.platform}</p>
               </li>
               <li className="info-item translate-y-full opacity-0">
-                <h3 className="mb-1 text-24 font-bold text-zinc-100">
+                <h3 className="mb-1 text-24 font-medium text-zinc-100">
                   Assignment
                 </h3>
-                <p className="max-w-[35rem] text-20 font-medium">
-                  {project.assignment}
-                </p>
+                <p className="max-w-[35rem] text-16">{project.assignment}</p>
               </li>
               <li className="info-item translate-y-full opacity-0">
-                <h3 className="mb-1 text-24 font-bold text-zinc-100">
+                <h3 className="mb-1 text-24 font-medium text-zinc-100">
                   Objective
                 </h3>
-                <p className="max-w-[35rem] text-20 font-medium">
-                  {project.objective}
-                </p>
+                <p className="max-w-[35rem] text-16">{project.objective}</p>
               </li>
               <li className="info-item translate-y-full opacity-0">
-                <h3 className="mb-1 text-24 font-bold text-zinc-100">
+                <h3 className="mb-1 text-24 font-medium text-zinc-100">
                   Technologies
                 </h3>
-                <p className="max-w-[35rem] text-20 font-medium">
-                  {project.technologies}
-                </p>
+                <p className="max-w-[35rem] text-16 ">{project.technologies}</p>
               </li>
             </ul>
           </section>
@@ -130,7 +120,7 @@ export default function ProjectPage() {
               {project.projectImages?.map((img, index) => (
                 <div
                   key={img._key}
-                  className="group cursor-pointer overflow-hidden rounded-xl shadow-md transition-transform hover:scale-[1.02]"
+                  className="group cursor-pointer overflow-hidden rounded-5 shadow-md transition-transform hover:scale-[1.02]"
                   onClick={() => openSlider(index)}
                 >
                   {img.asset && (

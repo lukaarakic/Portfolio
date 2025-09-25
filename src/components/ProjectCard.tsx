@@ -1,15 +1,20 @@
-import ButtonLink from './ButtonLink'
-import ExternalLink from '../assets/external-link.svg?react'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import ArrowUpRight from '../assets/arrow-right-up.svg?react'
+
+gsap.registerPlugin(ScrollTrigger)
 
 interface ProjectCardProps {
+  index: number
   className?: string
   alt?: string
   imageUrl: string
   to: string
   name: string
-  role: string
+  tags: string[]
+  disableScrollAnimation?: boolean
 }
 
 const ProjectCard = ({
@@ -18,17 +23,87 @@ const ProjectCard = ({
   alt,
   to,
   name,
-  role,
+  tags,
+  index,
+  disableScrollAnimation = false,
 }: ProjectCardProps) => {
   const [opacity, setOpacity] = useState(0)
+  const [scale, setScale] = useState(0)
   const navigate = useNavigate()
+  const cardRef = useRef<HTMLElement>(null)
+  const imageRef = useRef<HTMLImageElement>(null)
+
+  useEffect(() => {
+    const cardElement = cardRef.current
+    const imageElement = imageRef.current
+
+    if (cardElement && imageElement) {
+      if (disableScrollAnimation) {
+        gsap.set(cardElement, {
+          x: 0,
+          y: 0,
+          opacity: 1,
+        })
+
+        gsap.set(imageElement, {
+          scale: 1,
+        })
+      } else {
+        gsap.set(cardElement, {
+          x: -200,
+          y: 200,
+          opacity: 0,
+        })
+
+        gsap.set(imageElement, {
+          scale: 1.4,
+        })
+
+        gsap.to(cardElement, {
+          x: 0,
+          y: 0,
+          opacity: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: cardElement,
+            start: 'top 90%',
+            end: 'top 30%',
+            scrub: 1.5,
+            toggleActions: 'play none none reverse',
+          },
+        })
+
+        gsap.to(imageElement, {
+          scale: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: cardElement,
+            start: 'top 90%',
+            end: 'top 30%',
+            scrub: 1.5,
+            toggleActions: 'play none none reverse',
+          },
+        })
+      }
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.trigger === cardElement) {
+          trigger.kill()
+        }
+      })
+    }
+  }, [index, disableScrollAnimation])
 
   function onEnter() {
     setOpacity(1)
+    setScale(1)
   }
 
   function onLeave() {
     setOpacity(0)
+    setScale(0)
   }
 
   function onClick() {
@@ -37,33 +112,50 @@ const ProjectCard = ({
 
   return (
     <article
-      className={`${className} relative flex cursor-pointer`}
+      ref={cardRef}
+      className={`${className} relative flex cursor-pointer flex-col overflow-hidden`}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onClick={onClick}
     >
-      <img
-        src={imageUrl}
-        alt={alt}
-        className="w-full rounded-40 object-cover object-center"
-      />
+      <div className="relative overflow-hidden rounded-10">
+        <img
+          ref={imageRef}
+          src={imageUrl}
+          alt={alt}
+          className="w-full rounded-10 object-cover object-center"
+        />
+        <div
+          className="absolute inset-0 rounded-10 bg-black/40 transition-all duration-300"
+          style={{
+            opacity,
+          }}
+        />
+      </div>
+
+      <div className="mt-4 flex items-center justify-center gap-24">
+        <span className="text-18 text-zinc-100/50">0{index + 1}.</span>
+        <h2 className="text-30 font-medium text-zinc-100/50">{name}</h2>
+        <div className="ml-auto flex items-center gap-4">
+          {tags.map((tag, i) => (
+            <p
+              className="rounded-5 border border-zinc-100/50 px-4 py-2 text-16"
+              key={tag + i}
+            >
+              {tag}
+            </p>
+          ))}
+        </div>
+      </div>
 
       <div
-        className="absolute bottom-12 left-1/2 mx-auto flex w-[93%] -translate-x-1/2 items-center 
-      justify-between rounded-full bg-zinc-900 bg-opacity-80 px-20 py-8 text-zinc-100 backdrop-blur-xl transition-opacity duration-500 ease-out"
+        className="absolute right-8 top-8 rounded-5 bg-sky-500 p-2 transition-all"
         style={{
           opacity,
+          transform: `scale(${scale})`,
         }}
       >
-        <div>
-          <h4 className="text-24 font-medium">{name}</h4>
-          <span className="text-16 text-zinc-500">{role}</span>
-        </div>
-
-        <ButtonLink to="/" className="cursor-none">
-          Learn More
-          <ExternalLink className="w-12" />
-        </ButtonLink>
+        <ArrowUpRight className="h-12 w-12 text-zinc-100" />
       </div>
     </article>
   )

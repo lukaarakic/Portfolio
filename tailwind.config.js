@@ -16,6 +16,9 @@ export default {
       },
       borderRadius: {
         40: '4rem',
+        20: '2rem',
+        10: '1rem',
+        5: '0.5rem',
       },
       gridTemplateColumns: {
         'project-45/55': '45fr 55fr',
@@ -25,6 +28,15 @@ export default {
       },
       screens: {
         xs: '580px',
+      },
+      animation: {
+        marquee: 'marquee 40s linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
       },
     },
   },

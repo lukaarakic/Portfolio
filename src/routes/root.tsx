@@ -2,10 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import ReactLenis, { useLenis } from '@studio-freight/react-lenis'
-import MouseTrailer from '../components/MouseTrailer'
 import { useEffect } from 'react'
-import { PrismicProvider } from '@prismicio/react'
-import { client } from '../prismic'
 
 const Root = () => {
   const { pathname } = useLocation()
@@ -18,21 +15,15 @@ const Root = () => {
   }, [lenis, pathname])
 
   return (
-    <PrismicProvider client={client}>
-      <ReactLenis root>
-        <MouseTrailer />
+    <ReactLenis root>
+      <header>
+        <Navbar />
+      </header>
 
-        <header>
-          <Navbar />
-        </header>
+      <Outlet />
 
-        <main className="h-full">
-          <Outlet />
-        </main>
-
-        <Footer />
-      </ReactLenis>
-    </PrismicProvider>
+      <Footer />
+    </ReactLenis>
   )
 }
 export default Root

@@ -1,7 +1,6 @@
 /// <reference types="vite-plugin-svgr/client" />
 
 import { useState } from 'react'
-import Copy from '../assets/file-copy.svg?react'
 
 interface CopyButtonProps {
   className?: string
@@ -30,7 +29,6 @@ const CopyButton = ({
       className={`fake-button relative ${className}`}
       onClick={copyToClipboard}
     >
-      <Copy className="w-8" />
       hello@lukarakic.me
       <div
         className={`pointer-events-none absolute -bottom-10 left-1/2 w-[80%] -translate-x-1/2

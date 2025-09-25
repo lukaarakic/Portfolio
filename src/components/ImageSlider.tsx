@@ -60,7 +60,6 @@ export default function ImageSlider({
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
-      // Prevent zoom on mobile when double tapping
       document.body.style.touchAction = 'none'
     } else {
       document.body.style.overflow = 'unset'
@@ -85,8 +84,7 @@ export default function ImageSlider({
     setCurrentIndex((prev) => (prev + 1) % images.length)
   }
 
-  // Touch handling for swipe gestures
-  const minSwipeDistance = 30 // Reduced for better mobile sensitivity
+  const minSwipeDistance = 30
 
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null)
@@ -114,7 +112,6 @@ export default function ImageSlider({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-4 md:p-0">
-      {/* Close button */}
       <button
         onClick={onClose}
         className="absolute right-2 top-2 z-10 rounded-full bg-zinc-800 p-2 text-zinc-100 transition-colors hover:bg-zinc-700 md:right-6 md:top-6 md:p-3"
@@ -122,17 +119,14 @@ export default function ImageSlider({
         <CloseIcon className="h-5 w-5 md:h-6 md:w-6" />
       </button>
 
-      {/* Previous button */}
       {images.length > 1 && (
         <>
-          {/* Mobile: Bottom navigation */}
           <button
             onClick={goToPrevious}
             className="absolute bottom-20 left-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-zinc-800 bg-opacity-90 text-2xl text-zinc-100 transition-colors hover:bg-opacity-100 md:hidden"
           >
             ‹
           </button>
-          {/* Desktop: Side navigation */}
           <button
             onClick={goToPrevious}
             className="absolute left-2 top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full bg-zinc-800 bg-opacity-80 text-2xl text-zinc-100 transition-colors hover:bg-opacity-100 md:left-6 md:flex"
@@ -142,17 +136,14 @@ export default function ImageSlider({
         </>
       )}
 
-      {/* Next button */}
       {images.length > 1 && (
         <>
-          {/* Mobile: Bottom navigation */}
           <button
             onClick={goToNext}
             className="absolute bottom-20 right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-zinc-800 bg-opacity-90 text-2xl text-zinc-100 transition-colors hover:bg-opacity-100 md:hidden"
           >
             ›
           </button>
-          {/* Desktop: Side navigation */}
           <button
             onClick={goToNext}
             className="absolute right-2 top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full bg-zinc-800 bg-opacity-80 text-2xl text-zinc-100 transition-colors hover:bg-opacity-100 md:right-6 md:flex"
@@ -162,14 +153,12 @@ export default function ImageSlider({
         </>
       )}
 
-      {/* Image container */}
       <div
-        className="relative mx-4 max-h-[85vh] max-w-full overflow-hidden md:mx-0 md:max-h-[90vh] md:max-w-[90vw]"
+        className="relative mx-4 max-h-[85vh] max-w-full overflow-hidden rounded-10 md:mx-0 md:max-h-[90vh] md:max-w-[90vw]"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        {/* Loading indicator */}
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-zinc-900">
             <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-300 border-t-transparent"></div>
@@ -189,21 +178,18 @@ export default function ImageSlider({
         )}
       </div>
 
-      {/* Image counter */}
       {images.length > 1 && (
         <div className="absolute bottom-32 left-1/2 -translate-x-1/2 rounded-full bg-zinc-800 bg-opacity-90 px-3 py-1 text-sm text-zinc-100 md:bottom-6 md:px-4 md:py-2 md:text-base">
           {currentIndex + 1} / {images.length}
         </div>
       )}
 
-      {/* Image caption */}
       {currentImage?.caption && (
         <div className="absolute bottom-12 left-4 right-4 rounded-lg bg-zinc-800 bg-opacity-90 px-3 py-2 text-center text-sm text-zinc-100 md:bottom-20 md:left-1/2 md:right-auto md:max-w-md md:-translate-x-1/2 md:px-4 md:text-base">
           {currentImage.caption}
         </div>
       )}
 
-      {/* Backdrop click to close */}
       <div className="absolute inset-0 -z-10" onClick={onClose} />
     </div>
   )

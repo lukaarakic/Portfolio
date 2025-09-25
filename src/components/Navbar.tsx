@@ -1,98 +1,79 @@
-import CopyButton from './CopyButton'
-import Logo from './Logo'
-import { Link, useLocation } from 'react-router-dom'
-import useWindowDimensions from '../utils/useWindowDimensions'
+import { Link } from 'react-router-dom'
 import MobileMenu from './MobileMenu'
-import { useGSAP } from '@gsap/react'
+import Logo from '../assets/logo.svg?react'
+import { useEffect } from 'react'
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import BubbleButton from './BubbleButton'
+import AnimatedLink from './AnimatedLink'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const Navbar = () => {
-  const location = useLocation()
-  const isHomepage = location.pathname === '/'
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const aboutSection = document.getElementById('about')
+      if (!aboutSection) {
+        return
+      }
 
-  const { width } = useWindowDimensions()
-
-  useGSAP(() => {
-    gsap.fromTo(
-      '.nav-items > *',
-      {
-        y: 60,
-        rotateX: -90,
-        rotation: 5,
-      },
-      {
-        y: 0,
-        rotateX: 0,
-        rotation: 0,
-        stagger: 0.2,
-        duration: 1.5,
-        ease: 'expo.out',
-        delay: 2,
-      },
-    )
-
-    const navLinks = document.querySelectorAll('.nav-link')
-
-    navLinks.forEach((link) => {
-      const underline = link.querySelector('.underline')
-      const tl = gsap.timeline({ paused: true })
-
-      tl.fromTo(
-        underline,
-        {
-          width: '0%',
-          left: '0%',
+      ScrollTrigger.create({
+        trigger: '#about',
+        start: 'top 10%',
+        end: 'bottom 10%',
+        onEnter: () => {
+          gsap.to('#white-stroke', {
+            fill: '#27272a',
+            duration: 0.3,
+            ease: 'power2.out',
+          })
         },
-        {
-          width: '100%',
-          duration: 0.3,
+        onLeave: () => {
+          gsap.to('#white-stroke', {
+            fill: '#f1f5f9',
+            duration: 0.3,
+            ease: 'power2.out',
+          })
         },
-      )
-
-      tl.add('midway')
-
-      tl.fromTo(
-        underline,
-        {
-          width: '100%',
-          left: '0%',
+        onEnterBack: () => {
+          gsap.to('#white-stroke', {
+            fill: '#27272a',
+            duration: 0.3,
+            ease: 'power2.out',
+          })
         },
-        {
-          width: '0%',
-          left: '100%',
-          duration: 0.3,
-          immediateRender: false,
+        onLeaveBack: () => {
+          gsap.to('#white-stroke', {
+            fill: '#f1f5f9',
+            duration: 0.3,
+            ease: 'power2.out',
+          })
         },
-      )
-
-      link.addEventListener('mouseenter', () => {
-        tl.tweenFromTo(0, 'midway')
       })
 
-      link.addEventListener('mouseleave', () => {
-        tl.play()
-      })
-    })
-  })
+      // Refresh ScrollTrigger after creation
+      ScrollTrigger.refresh()
+    }, 200)
+
+    return () => {
+      clearTimeout(timer)
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+    }
+  }, [])
 
   return (
     <>
-      <nav className="fixed left-0 right-0 top-0 z-10 flex items-center justify-between px-20 pt-12 text-zinc-100">
+      <nav className="fixed left-0 right-0 top-0 z-40 flex items-center justify-between px-20 pt-12 text-zinc-100">
         <Link to={'/'}>
-          {isHomepage ? width > 580 ? '' : <Logo /> : <Logo />}
+          <Logo className="w-16" />
         </Link>
 
-        <div className="nav-items hidden items-center gap-14 text-18 md:flex">
-          <Link to={'/about-me'} className="nav-link relative" key={'about-me'}>
-            <span className="word">About me</span>
-            <span className="underline"></span>
-          </Link>
+        <div className="nav-items hidden items-center justify-center gap-14 rounded-10 bg-zinc-800 px-10 py-6 text-20 font-medium md:flex">
+          <AnimatedLink scrollTo="#about">About me</AnimatedLink>
 
-          <Link to={'/projects'} className="nav-link relative" key={'projects'}>
-            <span className="word">Work</span>
-            <span className="underline"></span>
-          </Link>
-          <CopyButton copyValue="hello@lukarakic.me" />
+          <AnimatedLink to={'/projects'}>Work</AnimatedLink>
+
+          <BubbleButton href="mailto:hello@lukarakic.me">Contact</BubbleButton>
         </div>
 
         <MobileMenu />

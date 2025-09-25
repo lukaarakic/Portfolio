@@ -47,9 +47,9 @@ export type Project = {
     _type: 'image'
     _key: string
   }>
-  category?: 'webflow' | 'custom-code'
-  role?: string
+  tags?: Array<'Custom Code' | 'Webflow' | 'UI/UX Design'>
   platform?: string
+  category?: 'custom-code' | 'webflow' | 'python'
   liveUrl?: string
   assignment?: string
   objective?: string
