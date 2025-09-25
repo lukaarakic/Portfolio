@@ -81,10 +81,10 @@ export default function ProjectPage() {
             </h1>
 
             <ul className="mb-24 grid grid-cols-1 items-start justify-between gap-8 xs:grid-cols-3 md:flex">
-              <li className="info-item translate-y-full opacity-0">
+              {/* <li className="info-item translate-y-full opacity-0">
                 <h3 className="mb-1 text-24 font-medium text-zinc-100">Role</h3>
                 <p className="max-w-[35rem] text-16">{project.role}</p>
-              </li>
+              </li> */}
               <li className="info-item translate-y-full opacity-0">
                 <h3 className="mb-1 text-24 font-medium text-zinc-100">
                   Platforms
