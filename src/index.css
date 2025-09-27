@@ -64,7 +64,7 @@
   }
 
   body {
-    @apply relative mx-auto bg-zinc-950 text-zinc-100;
+    @apply relative mx-auto overflow-x-hidden bg-zinc-950 text-zinc-100;
     max-width: 2600px;
   }
 

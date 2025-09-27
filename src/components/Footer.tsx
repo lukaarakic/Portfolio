@@ -34,7 +34,7 @@ const Footer = () => {
         <ul className="mb-40 mt-5 space-y-4">
           <li>
             <AnimatedLink
-              href="http://linkedin.com"
+              href="https://www.linkedin.com/in/lukaarakic/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -43,7 +43,7 @@ const Footer = () => {
           </li>
           <li>
             <AnimatedLink
-              href="http://upwork.com"
+              href="https://www.upwork.com/freelancers/~018f967d7f42213756"
               target="_blank"
               rel="noopener noreferrer"
             >

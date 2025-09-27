@@ -67,7 +67,7 @@ const ProjectCard = ({
           scrollTrigger: {
             trigger: cardElement,
             start: 'top 90%',
-            end: 'top 30%',
+            end: 'top 60%',
             scrub: 1.5,
             toggleActions: 'play none none reverse',
           },
@@ -79,7 +79,7 @@ const ProjectCard = ({
           scrollTrigger: {
             trigger: cardElement,
             start: 'top 90%',
-            end: 'top 30%',
+            end: 'top 50%',
             scrub: 1.5,
             toggleActions: 'play none none reverse',
           },

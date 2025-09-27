@@ -15,9 +15,6 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function Index() {
   const [projects, setProjects] = useState<Project[] | null>(null)
-  const loadingScreenRef = useRef<HTMLDivElement>(null)
-  const letterLRef = useRef<HTMLSpanElement>(null)
-  const letterRRef = useRef<HTMLSpanElement>(null)
   const photoRef = useRef<HTMLImageElement>(null)
   const arrowRef = useRef<HTMLDivElement>(null)
   const capabilityRefs = useRef<(HTMLDivElement | null)[]>([])
@@ -48,60 +45,6 @@ export default function Index() {
         setProjects(projects)
       } catch (error) {
         console.error('Error fetching projects:', error)
-      } finally {
-        // Animate the loading screen
-        setupLoadingAnimation()
-      }
-    }
-
-    const setupLoadingAnimation = () => {
-      const letterL = letterLRef.current
-      const letterR = letterRRef.current
-      const loadingScreen = loadingScreenRef.current
-
-      if (letterL && letterR && loadingScreen) {
-        // Calculate responsive offset based on screen width
-        const isMobile = window.innerWidth < 640
-        const xOffset = isMobile ? -120 : -200
-
-        // Initially hide both letters and position R at L's position
-        gsap.set([letterL, letterR], { opacity: 0 })
-        gsap.set(letterR, {
-          x: xOffset, // Responsive offset based on screen size
-          opacity: 0,
-          visibility: 'hidden', // Completely hide R initially
-        })
-
-        const tl = gsap.timeline()
-
-        // Show letter L first
-        tl.to(letterL, {
-          opacity: 1,
-          duration: 0.5,
-          ease: 'power2.out',
-        })
-          // Wait a bit, then make R visible and animate it from L's position
-          .set(letterR, { visibility: 'visible' })
-          .to(
-            letterR,
-            {
-              opacity: 1,
-              x: 0,
-              duration: 0.8,
-              ease: 'power2.out',
-            },
-            '+=0.3',
-          )
-          // Wait, then slide the entire loading screen up
-          .to(
-            loadingScreen,
-            {
-              y: '-100%',
-              duration: 1,
-              ease: 'power2.inOut',
-            },
-            '+=0.5',
-          )
       }
     }
 
@@ -139,12 +82,13 @@ export default function Index() {
             x: 0,
             y: 0,
             opacity: 1,
-            ease: 'none',
+            ease: 'power2.out',
             scrollTrigger: {
               trigger: element,
-              start: 'top 70%',
-              end: 'top 20%',
-              scrub: 1.5,
+              start: 'top 85%',
+              end: 'top 45%',
+              scrub: 2,
+              toggleActions: 'play none none reverse',
             },
           })
         }
@@ -206,19 +150,6 @@ export default function Index() {
 
   return (
     <>
-      <div
-        ref={loadingScreenRef}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950"
-      >
-        <div className="flex items-center gap-4 text-[20vw] font-bold sm:gap-8 sm:text-[16.5vw]">
-          <span ref={letterLRef} className="text-white opacity-0">
-            L
-          </span>
-          <span ref={letterRRef} className="invisible text-sky-500 opacity-0">
-            R
-          </span>
-        </div>
-      </div>
       <main className="relative z-10">
         <div className="animate-fadeIn">
           <img
@@ -348,7 +279,7 @@ export default function Index() {
               </div>
 
               <div className="relative grid grid-cols-1 border-dashed border-slate-100/25 pb-[50rem] lg:grid-cols-3 lg:border-b">
-                <div className="px-8 lg:pb-[51rem]">
+                <div className="px-8 pb-40 lg:pb-[51rem]">
                   <div
                     ref={setCapabilityRef(0)}
                     className="flex items-start gap-6"
@@ -361,7 +292,7 @@ export default function Index() {
                     </span>
                   </div>
                 </div>
-                <div className="px-8 lg:pb-[50rem]">
+                <div className="px-8 pb-40 lg:pb-[50rem]">
                   <div
                     ref={setCapabilityRef(1)}
                     className="flex items-start gap-6"
